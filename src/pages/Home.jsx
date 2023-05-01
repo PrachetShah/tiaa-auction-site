@@ -6,11 +6,13 @@ import jewellery from "../assets/videos/jewellery.mp4";
 import vehicle from "../assets/videos/vehicle.mp4";
 import wine from "../assets/videos/wine2.mp4";
 import antiques from "../assets/videos/Antiques.mp4";
+import { Pannellum } from "pannellum-react";
 import books from "../assets/videos/books.mp4";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Navbar } from "../components/Navbar";
 import { Link } from "react-router-dom";
 import { beaches, temples } from "./PreferenceData"
+import realE1 from "../assets/images/realestate/example3.jpg";
 import {
   MapContainer,
   Marker,
@@ -339,6 +341,28 @@ const Home = () => {
           </div>
         </div> */}
       </div>
+      <Pannellum
+        width="100%"
+        height="500px"
+
+        image={realE1}
+        pitch={10}
+        yaw={180}
+        hfov={110}
+        autoLoad
+        showZoomCtrl={false}
+        onLoad={() => {
+          console.log("panorama loaded");
+        }}
+      >
+        <Pannellum.Hotspot
+          type="custom"
+          pitch={31}
+          yaw={150}
+          handleClick={(evt, name) => console.log(name)}
+          name="hs1"
+        />
+      </Pannellum>
       <Footer />
     </div>
   );
