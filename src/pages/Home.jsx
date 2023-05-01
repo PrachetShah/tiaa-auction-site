@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
-import DatePicker from "react-datepicker";
+import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import art from "../assets/videos/art.mp4";
 import jewellery from "../assets/videos/jewellery.mp4";
@@ -8,128 +7,16 @@ import wine from "../assets/videos/wine2.mp4";
 import antiques from "../assets/videos/Antiques.mp4";
 import { Pannellum } from "pannellum-react";
 import books from "../assets/videos/books.mp4";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Navbar } from "../components/Navbar";
 import { Link } from "react-router-dom";
-import { beaches, temples } from "./PreferenceData"
+import { beaches, temples } from "./PreferenceData";
 import realE1 from "../assets/images/realestate/example3.jpg";
-import {
-  MapContainer,
-  Marker,
-  TileLayer,
-  Popup,
-  FeatureGroup,
-  withLeaflet,
-} from "react-leaflet";
 
-import { BiMapPin, BiMap } from "react-icons/bi";
-import { events } from "./eventData";
 import { CometChat } from "@cometchat-pro/chat";
-import { Dialog, Transition } from "@headlessui/react";
-import L from "leaflet";
-import mark from "../assets/images/markers.png";
 import { useTranslation } from "react-i18next";
 import Footer from "./FooterHome";
-
-const Card = ({ data, theme }) => {
-  const { t } = useTranslation();
-  const [openMap, setOpenMap] = useState(false);
-  const [openView, setOpenView] = useState(false);
-
-
-
-
-  const cancelButtonRef = useRef(null);
-
-  return (
-    <div
-      key={data.id}
-      className="w-full rounded-xl shadow-lg border relative bg-gray-100"
-    >
-      <img
-        className="rounded-t-xl h-[35vh] w-full"
-        src={data.image_url}
-        alt=""
-      />
-      <div className="px-4 py-6">
-        <h1 className="text-gray-600 text-xl font-bold mb-2">{t(data.name)}</h1>
-        <h1 className="text-gray-400 text-sm mb-4 flex items-center gap-2">
-          <HiOutlineLocationMarker className="text-lg" /> {t(data.location)}
-        </h1>
-        {/* <div className="border-t border-b p-3 flex justify-between items-center">
-          <h1 className="text-gray-400"> Date :</h1>
-          <h1 className="text-gray-600 text-2xl font-bold">{data.date}</h1>
-        </div> */}
-        <h1 className="text-sm text-gray-600 py-4">
-          Rate : {parseInt(Math.abs(data.latitude % 10))}/10
-        </h1>
-        <div className="flex justify-between">
-
-          <button
-            onClick={() => setOpenView(true)}
-            className={`flex items-center gap-2 text-white font-semibold uppercase rounded-full px-6 py-2 ${theme == "emerald"
-              ? "bg-emerald-500"
-              : theme == "amber"
-                ? "bg-amber-500"
-                : theme == "sky"
-                  ? "bg-sky-500"
-                  : theme == "red"
-                    ? "bg-red-500"
-                    : theme == "violet"
-                      ? "bg-violet-500"
-                      : "bg-purple-500"
-              }`}
-          >
-            <BiMapPin /> View
-          </button>
-        </div>
-      </div>
-      <Transition.Root show={openMap} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-10"
-          initialFocus={cancelButtonRef}
-          onClose={setOpenMap}
-        >
-          <div className="fixed inset-0 z-10">
-            <div className="flex min-h-screen min-w-screen items-end justify-center text-center sm:items-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-[70vw]">
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                      onClick={() => setOpenMap(false)}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-      <Transition.Root show={openView} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-10"
-          initialFocus={cancelButtonRef}
-          onClose={setOpenView}
-        >
-        </Dialog>
-      </Transition.Root>
-    </div>
-  );
-};
+import SHOP_DATA from "../shop-data.json";
+import CategoryItem from "../components/category-item";
 
 const Background = ({ backgroundVideo, theme }) => {
   return (
@@ -151,7 +38,7 @@ const Home = () => {
   const [theme, setTheme] = useState("blue");
   useEffect(() => {
     localStorage.setItem("color", theme);
-  }, [theme])
+  }, [theme]);
 
   localStorage.setItem("color", theme);
   useEffect(() => {
@@ -191,13 +78,13 @@ const Home = () => {
   console.log(randomItem);
   return (
     <div className={`w-full h-full relative `}>
-
       <video
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "jewellery" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "jewellery" ? "hidden" : "block"
+        }`}
       >
         <source src={jewellery} type="video/mp4" />
       </video>
@@ -205,8 +92,9 @@ const Home = () => {
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "art" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "art" ? "hidden" : "block"
+        }`}
       >
         <source src={art} type="video/mp4" />
       </video>
@@ -214,8 +102,9 @@ const Home = () => {
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "antiques" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "antiques" ? "hidden" : "block"
+        }`}
       >
         <source src={antiques} type="video/mp4" />
       </video>
@@ -223,8 +112,9 @@ const Home = () => {
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "wine" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "wine" ? "hidden" : "block"
+        }`}
       >
         <source src={wine} type="video/mp4" />
       </video>
@@ -232,8 +122,9 @@ const Home = () => {
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "vehicle" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "vehicle" ? "hidden" : "block"
+        }`}
       >
         <source src={vehicle} type="video/mp4" />
       </video>
@@ -241,8 +132,9 @@ const Home = () => {
         autoPlay
         loop
         muted
-        className={`absolute -z-10 w-full h-auto ${randomItem !== "books" ? "hidden" : "block"
-          }`}
+        className={`absolute -z-10 w-full h-auto ${
+          randomItem !== "books" ? "hidden" : "block"
+        }`}
       >
         <source src={books} type="video/mp4" />
       </video>
@@ -259,7 +151,9 @@ const Home = () => {
             {t("Bid, Win, Experience: Unleash the Thrill of Auctions!")}
           </h1>
           <h1 className="text-xl text-gray-100 font-medium text-center leading-normal">
-            {t("Discover historic collections and masterpieces by modern masters and contemporary giants of today")}
+            {t(
+              "Discover historic collections and masterpieces by modern masters and contemporary giants of today"
+            )}
           </h1>
           <Link to="/register" className="">
             <button
@@ -271,10 +165,8 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <div
-        className={` px-36 bg-gradient-to-t from-white
-        bg-blue-500`}
-      >
+
+      <div className="bg-white px-10">
         {/*<div className="flex flex-col items-center py-8">
           <h2 className="font-bold text-3xl py-8">{t("Select your theme :")} </h2>
           <div className="flex items-center justify-between gap-8 mt-4">
@@ -344,7 +236,6 @@ const Home = () => {
       <Pannellum
         width="100%"
         height="500px"
-
         image={realE1}
         pitch={10}
         yaw={180}
@@ -363,6 +254,62 @@ const Home = () => {
           name="hs1"
         />
       </Pannellum>
+      <div>
+        <div className="overflow-x-scroll flex px-10">
+          {SHOP_DATA.map((item) => {
+            // console.log(item);
+            return <CategoryItem items={item}></CategoryItem>;
+          })}
+        </div>
+      </div>
+
+      <div className="mx-6">
+        <div>
+          <h1 className="text-3xl py-3">Upcoming Auctions</h1>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {SHOP_DATA.map((item) => {
+            // console.log(item);
+            const { id, name, imageUrl, price } = item;
+
+            return (
+              <div className="w-full h-full flex mx-6 my-3 py-2" id={id}>
+                <div
+                  style={{ backgroundImage: `url(${imageUrl})` }}
+                  className="h-52 w-1/2"
+                  href={imageUrl}
+                  alt={name}
+                />
+                <div className="flex-col pl-5">
+                  <h3>Date</h3>
+                  <h2>{name}</h2>
+                  <p>Shop Now - {price}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <h1 className="text-3xl py-3 mx-6">Trending Lots</h1>
+        </div>
+        <div className="overflow-x-scroll flex px-10">
+          {SHOP_DATA.map((item) => {
+            // console.log(item);
+
+            return (
+              <div className="mb-4 pb-2 border-2 border-gray-400">
+                <CategoryItem items={item}></CategoryItem>
+                <button className="text-2xl  border-2 border-blue-100 mx-6 px-4 hover:border-black">
+                  FOLLOW
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <Footer />
     </div>
   );
