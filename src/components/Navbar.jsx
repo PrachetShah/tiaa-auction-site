@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { MdOutlineLanguage } from "react-icons/md"
+import {RiAuctionLine} from "react-icons/ri"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -45,23 +46,12 @@ export const Navbar = () => {
   return (
     <div className="w-full flex px-24 py-4 justify-between items-center">
       <div className="flex items-center gap-2">
-        <img className="w-8" src={logo} alt="" />
+        <RiAuctionLine className="text-2xl text-white" />
         <h1
-          className={`text-2xl font-bold underline ${
-            color === "emerald"
-              ? "decoration-emerald-500"
-              : color === "amber"
-              ? "decoration-amber-500"
-              : color === "sky"
-              ? "decoration-sky-500"
-              : color === "red"
-              ? "decoration-red-500"
-              : color === "violet"
-              ? "decoration-violet-500"
-              : "decoration-purple-500"
+          className={`text-2xl font-bold underline decoration-blue-500
           }`}
         >
-        tripright
+        WinWise
         </h1>
       </div>
       <div className="flex gap-10 items-center capitalize">
@@ -152,14 +142,14 @@ export const Navbar = () => {
         <div className="flex gap-4 items-center">
           <button
             onClick={() => logout()}
-            className={`text-gray-100 text-sm px-8 py-4 bg-${color}-500 rounded-full`}
+            className={`text-gray-100 text-sm px-8 py-4 bg-${color}-900 rounded-full`}
           >
             {t("logout")}
           </button>
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button
-                className={`text-gray-100 text-sm px-8 py-4 bg-${color}-500 rounded-full`}
+                className={`text-gray-100 text-sm px-8 py-4 bg-${color}-900 rounded-full`}
               >
                 lang <MdOutlineLanguage className="inline" />
               </Menu.Button>
