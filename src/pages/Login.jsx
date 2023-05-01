@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
-import login from '../assets/videos/login.mp4'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import login from "../assets/videos/login.mp4";
+import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/images/logo.png";
-import { CometChat } from '@cometchat-pro/chat';
-import { COMETCHAT_CONSTANTS } from '../constants';
+import { CometChat } from "@cometchat-pro/chat";
+import { COMETCHAT_CONSTANTS } from "../constants";
+import { RiAuctionLine } from "react-icons/ri";
 
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    email: '',
-    password: ''
-  })
-  const [show, setShow] = useState(false)
+    email: "",
+    password: "",
+  });
+  const [show, setShow] = useState(false);
   const loginUser = () => {
     var data = new FormData();
     data.append("email", user.email);
@@ -30,7 +31,7 @@ const Login = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response)
+        console.log(response);
         localStorage.setItem("token", response.data.token);
         CometChat.login(uuid, COMETCHAT_CONSTANTS.AUTH_KEY).then(
           (user) => {
@@ -40,7 +41,7 @@ const Login = () => {
             console.log("Login failed with exception:", { error });
           }
         );
-        navigate('/')
+        navigate("/");
       })
       .catch(function (error) {
         toast.error("Invalid Credentials", {
@@ -54,11 +55,11 @@ const Login = () => {
           theme: "light",
         });
         setUser({
-          email: '',
-          password: ''
-        })
+          email: "",
+          password: "",
+        });
       });
-  }
+  };
   return (
     <div className="h-screen relative overflow-hidden">
       <video autoPlay loop muted className="absolute -z-10 w-screen">
@@ -66,10 +67,10 @@ const Login = () => {
       </video>
       <ToastContainer />
       <div className="w-1/2 h-screen bg-gray-100/80 p-24">
-        <Link className='flex items-center gap-2' to="/">
-          <img className="w-8" src={logo} alt="" />
+        <Link className="flex items-center gap-2" to="/">
+          <RiAuctionLine className="text-2xl text-black" />
           <h1 className="text-2xl font-bold underline decoration-blue-500">
-            tripbright
+            WinWise
           </h1>
         </Link>
         <h1 className="text-5xl font-semibold mt-12 uppercase">Login</h1>
@@ -117,6 +118,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;
