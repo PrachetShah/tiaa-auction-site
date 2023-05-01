@@ -43,13 +43,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/itinerary" element={<Itinerary />} />
-        <Route path="/pairing" element={<Pairing />} />
         <Route path="/companion/:id" element={<Companion />} />
         <Route path="/events" element={<Events />} />
         <Route path="/maps" element={<Maps />} />
-        <Route path="/forum" element={<Forum />}></Route>
-        <Route path="/vendors" element={<Vendors />}></Route>
       </Routes>
     </div>
   );
