@@ -20,6 +20,7 @@ import Chating from "./pages/Forum/components/Chat";
 import NavbarFire from "./pages/Forum/components/Navbar";
 import Forum from "./pages/Forum/components/Forum";
 import Vendors from "./pages/Vendors";
+import CarView from "./pages/CarViewing";
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/viewing" element={<Viewing/>} />
+        <Route path="/carviewing" element={<CarView/>} />
         <Route path="/home" element={<Chat />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
