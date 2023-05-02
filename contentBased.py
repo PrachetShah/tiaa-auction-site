@@ -17,7 +17,6 @@ similarity_matrix = cosine_similarity(tfidf_matrix)
 
 # Make recommendations for a product
 def recommend_products(product_name):
-    # Check if the data is empty
     if data.empty:
         return []
     
