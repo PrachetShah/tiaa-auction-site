@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
+import { BsCalendarDate } from "react-icons/bs";
 
 function AddItem() {
   const [images, setImages] = React.useState([]);
+  const [productType, setProductType] = useState("");
+  const [auctionType, setAuctionType] = useState("");
+  const [description, setDescription] = useState("");
+  const [startPrice, setStartPrice] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -162,10 +170,10 @@ function AddItem() {
           <div class="flex flex-col md:flex-row -mx-4">
             <div class="md:flex-1 px-4">
               <div x-data="{ image: 1 }" x-cloak>
-                <div class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
+                <div class="h-72 md:h-96 rounded-lg bg-gray-100 mb-4">
                   <div
                     x-show="image === 1"
-                    class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
+                    class="h-72 md:h-96 rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
                   >
                     {/* <input type="image" class="text-5xl" /> */}
                     <ImageUploading
@@ -225,34 +233,22 @@ function AddItem() {
                     </ImageUploading>
                   </div>
                 </div>
-
-                {/* <div class="flex -mx-2 mb-4">
-                  <template x-for="i in 4">
-                    <div class="flex-1 px-2">
-                      <button class="focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center">
-                        <span x-text="i" class="text-2xl"></span>
-                      </button>
-                    </div>
-                  </template>
-                </div> */}
               </div>
             </div>
             <div class="md:flex-1 px-4">
               <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
                 Product Name (Add here)
               </h2>
-              {/* <p class="text-gray-500 text-sm">
-                By{" "}
-                <a href="#" class="text-indigo-600 hover:underline">
-                  ABC Company
-                </a>
-              </p> */}
 
               <div class="flex items-center space-x-4 my-4">
                 <div>
                   <div class="rounded-lg bg-gray-100 flex py-2 px-3">
                     <span class="text-indigo-400 mr-1 mt-1">$</span>
-                    <input class="font-bold text-indigo-600 text-3xl w-24" />
+                    <input
+                      class="font-bold text-indigo-600 text-3xl w-32"
+                      value={startPrice}
+                      onChange={(e) => setStartPrice(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div class="flex-1">
@@ -266,7 +262,70 @@ function AddItem() {
                 <input
                   type="text"
                   class="border-2 w-full font-bold text-gray-400 text-lg px-2"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
+              </div>
+
+              <div class="relative py-2">
+                <div class="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
+                  Product Type
+                </div>
+                <select
+                  class="text-center w-full cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 flex items-end pb-1"
+                  value={productType}
+                  onChange={(e) => setProductType(e.target.value)}
+                >
+                  <option>Electronics</option>
+                  <option>Vehicles</option>
+                  <option>Real Estate</option>
+                  <option>Art Piece</option>
+                  <option>Jewelery</option>
+                </select>
+
+                <svg
+                  class="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-6 mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                  />
+                </svg>
+              </div>
+
+              <div class="relative py-2">
+                <div class="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
+                  Auction Type
+                </div>
+                <select
+                  class="text-center w-full cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 flex items-end pb-1"
+                  value={auctionType}
+                  onChange={(e) => setAuctionType(e.target.value)}
+                >
+                  <option>Normal</option>
+                  <option>Event</option>
+                </select>
+
+                <svg
+                  class="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-6 mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                  />
+                </svg>
               </div>
 
               <div class="flex py-4 space-x-4">
@@ -297,14 +356,53 @@ function AddItem() {
                     />
                   </svg>
                 </div>
-
-                <button
-                  type="button"
-                  class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
-                >
-                  Add for Auction
-                </button>
+                <div date-rangepicker class="flex items-center">
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <BsCalendarDate />
+                    </div>
+                    <input
+                      name="start"
+                      type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Select date start"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                    />
+                  </div>
+                  <span class="mx-4 text-gray-500">to</span>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <BsCalendarDate />
+                    </div>
+                    <input
+                      name="end"
+                      type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Select date end"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
+              <button
+                type="button"
+                class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
+                onClick={() => {
+                  console.log(
+                    productType,
+                    auctionType,
+                    startDate,
+                    endDate,
+                    description,
+                    startPrice,
+                    images
+                  );
+                }}
+              >
+                Add for Auction
+              </button>
             </div>
           </div>
         </div>
