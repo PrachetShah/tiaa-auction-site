@@ -253,10 +253,11 @@ const Home = () => {
           pitch={31}
           yaw={150}
           handleClick={(evt, name) => console.log(name)}
-          name="hs1"s
+          name="hs1"
+          s
         />
       </Pannellum>
-      
+
       <div>
         <div className="overflow-x-scroll flex px-10">
           {SHOP_DATA.map((item) => {
