@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import { useEffect } from "react";
 import Package from "./pages/Package";
+import Viewing from "./pages/Viewing";
 import Maps from "./pages/Maps";
 import { ALAN_API } from "./constants";
 import Chat from "./pages/Chat";
@@ -36,9 +37,10 @@ function App() {
     });
   }, []);
   return (
-    <div className="h-full">
+    <div className="">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/viewing" element={<Viewing/>} />
         <Route path="/home" element={<Chat />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

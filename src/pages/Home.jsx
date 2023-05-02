@@ -17,6 +17,8 @@ import { useTranslation } from "react-i18next";
 import Footer from "./FooterHome";
 import SHOP_DATA from "../shop-data.json";
 import CategoryItem from "../components/category-item";
+import Jewelry360View from "./3d_render/Jewelry360View";
+import { Canvas } from "react-three-fiber";
 
 const Background = ({ backgroundVideo, theme }) => {
   return (
@@ -63,18 +65,19 @@ const Home = () => {
     setFilteredList(filtered);
   }, [destination]);
 
+  var options = ["jewellery", "art", "antiques", "wine", "vehicles", "books"];
   useEffect(() => {
     let filtered = temples.filter((item) =>
       item.location.toLowerCase().includes(destination.toLowerCase())
     );
     setFilteredList2(filtered);
+    setRandomItem(options[Math.floor(Math.random() * options.length)]);
   }, [destination]);
 
   // Array of options
-  var options = ["jewellery", "art", "antiques", "wine", "vehicles", "books"];
+  const [randomItem, setRandomItem] = useState("books");
 
   // Randomly select an item
-  var randomItem = options[Math.floor(Math.random() * options.length)];
   console.log(randomItem);
   return (
     <div className={`w-full h-full relative `}>
@@ -165,7 +168,6 @@ const Home = () => {
           </Link>
         </div>
       </div>
-
       <div className="bg-white px-10">
         {/*<div className="flex flex-col items-center py-8">
           <h2 className="font-bold text-3xl py-8">{t("Select your theme :")} </h2>
@@ -251,9 +253,10 @@ const Home = () => {
           pitch={31}
           yaw={150}
           handleClick={(evt, name) => console.log(name)}
-          name="hs1"
+          name="hs1"s
         />
       </Pannellum>
+      
       <div>
         <div className="overflow-x-scroll flex px-10">
           {SHOP_DATA.map((item) => {
