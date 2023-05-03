@@ -6,8 +6,9 @@ import Table from "../components/Table";
 import { useState } from "react";
 import { products, productsColumns } from "../data/products";
 import ProductCard from "../components/productUi/productCard";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import RecommendProducts from "../components/recommend/recommendProducts";
 
 const CategoriesNavbar = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -18,7 +19,7 @@ const CategoriesNavbar = () => {
 
   return (
     <Tabs
-      style={{marginBottom:"20px"}}
+      style={{ marginBottom: "20px" }}
       value={activeTab}
       onChange={handleTabChange}
       indicatorColor="primary"
@@ -32,12 +33,11 @@ const CategoriesNavbar = () => {
   );
 };
 
-
 const Products = () => {
-  
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-    <CategoriesNavbar/>
+      <CategoriesNavbar />
+      <RecommendProducts productName={"iPhone"} />
       <Box
         sx={{
           display: "flex",
@@ -49,9 +49,11 @@ const Products = () => {
       >
         <Grid container spacing={2}>
           {products.map((x) => {
-            return <Grid item xs={4}>
-              <ProductCard />
-            </Grid>
+            return (
+              <Grid item xs={4}>
+                <ProductCard />
+              </Grid>
+            );
           })}
         </Grid>
       </Box>
