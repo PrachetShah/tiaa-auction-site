@@ -21,7 +21,6 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
   const theme = useTheme();
   const location = useLocation();
   const path = location.pathname;
-  console.log(path);
   const currentTheme = theme.palette.mode;
 
   return (

@@ -24,6 +24,8 @@ import {
   Transactions,
 } from "./pages";
 import Footer from "./components/common/Footer";
+import UserSelling from "./pages/UserSelling";
+import UserBuying from "./pages/UserBuying";
 
 const sideBarWidth = 250;
 
@@ -63,15 +65,11 @@ function App() {
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:id" element={<Dashboard />} />
             <Route path="/products/list" element={<ProductCategories />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/customers/:id" element={<SingleCustomer />} />
-            <Route path="/sales/analysis" element={<SalesAnalytics />} />
-            <Route path="/sales" element={<ProductSales />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/template" element={<OrderTemplate />} />
             <Route path="/orders/:id" element={<SingleOrder />} />
             <Route path="/profile/settings" element={<Settings />} />
-            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/profile/buying" element={<UserBuying />} />
+            <Route path="/profile/selling" element={<UserSelling />} />
             <Route path="/inbox" element={<Inbox />} />
           </Routes>
           <Footer />

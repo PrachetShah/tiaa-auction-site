@@ -35,20 +35,20 @@ export const links = [
       },
     ],
   },
-  {
-    name: "Sales",
-    icon: <BsCurrencyDollar />,
-    subLinks: [
-      {
-        name: "Sales Analytics",
-        url: "/sales/analysis",
-      },
-      {
-        name: "Product Sales",
-        url: "/sales",
-      },
-    ],
-  },
+  // {
+  //   name: "Sales",
+  //   icon: <BsCurrencyDollar />,
+  //   subLinks: [
+  //     {
+  //       name: "Sales Analytics",
+  //       url: "/sales/analysis",
+  //     },
+  //     {
+  //       name: "Product Sales",
+  //       url: "/sales",
+  //     },
+  //   ],
+  // },
   {
     name: "Orders",
     icon: <FiShoppingCart />,
@@ -69,15 +69,11 @@ export const links = [
       },
       {
         name: "Selling analysis",
-        url: "/profile/buying",
+        url: "/profile/selling",
       },
     ],
   },
-  {
-    name: "Reviews",
-    icon: <FiMessageCircle />,
-    url: "/reviews",
-  },
+ 
   {
     name: "Inbox",
     icon: <FiMail />,
