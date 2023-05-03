@@ -12,11 +12,11 @@ import {
 } from "react-icons/fi";
 
 export const links = [
-  {
-    name: "Dashboard",
-    icon: <FiHome />,
-    url: "/",
-  },
+  // {
+  //   name: "Dashboard",
+  //   icon: <FiHome />,
+  //   url: "/",
+  // },
   {
     name: "Products",
     icon: <FiShoppingBag />,
