@@ -37,10 +37,6 @@ function App() {
   };
   return (
     <div>
-      <Routes>
-        <Route path="/login" element={<Products />} />
-        <Route path="/signup" element={<AddProduct />} />
-      </Routes>
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
