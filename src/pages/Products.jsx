@@ -4,31 +4,27 @@ import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Table from "../components/Table";
 import { useState, useEffect } from "react";
-import { products, productsColumns } from "../data/products";
+import { categories } from "../data/categories";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import axios from "axios";
 
-const CategoriesNavbar = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue);
-  };
-
+const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
   return (
     <Tabs
-      style={{marginBottom:"20px"}}
+      style={{ marginBottom: "20px" }}
       value={activeTab}
       onChange={handleTabChange}
       indicatorColor="primary"
       textColor="primary"
       centered
     >
-      <Tab label="Category 1" />
-      <Tab label="Category 2" />
-      <Tab label="Category 3" />
+      {
+        allTabs?.map((category) => {
+          return <Tab label={category.name} />
+        })
+      }
     </Tabs>
   );
 };
@@ -37,7 +33,14 @@ const CategoriesNavbar = () => {
 const Products = () => {
 
   const [data, setData] = useState([]);
-  
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const allTabs = [{category_id:0, name: "All" }, ...categories]
+  let noauctions = true;
   useEffect(() => {
     let config = {
       method: 'get',
@@ -58,7 +61,7 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-    <CategoriesNavbar/>
+      <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
           display: "flex",
@@ -69,11 +72,16 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
-          {data.map((inst) => {
-            return <Grid item xs={4}>
+          {data?.map((inst) => {
+            if(allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name){
+              console.log("here")
+              noauctions = false;
+            }
+            return ((allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name) ? <Grid item xs={4}>
               <ProductCard data={inst} />
-            </Grid>
+            </Grid> : <></>)
           })}
+          {noauctions ? <Typography variant="h5">No Auctions</Typography> : <></>}
         </Grid>
       </Box>
     </Box>

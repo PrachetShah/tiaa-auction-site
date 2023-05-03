@@ -7,15 +7,24 @@ import TopCountries from "../components/home/TopCountries";
 import TransactionCustomer from "../components/home/TransactionCustomer";
 import Table from "../components/Table";
 import { orders, ordersColumns } from "../data/orders";
+import {useNavigate} from "react-router-dom"
 
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 const Dashboard = () => {
   const ComponentWrapper = styled(Box)({
     marginTop: "10px",
     paddingBottom: "10px",
   });
 
+  const going = useNavigate()
+  const goBack = () => {
+    going("/");
+  };
+
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
+
+       <KeyboardBackspaceIcon onClick={goBack} style={{cursor:"pointer"}}/>
       <Typography variant="h6" sx={{ marginBottom: "14px" }}>
         Dashboard
       </Typography>
