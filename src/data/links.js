@@ -52,16 +52,7 @@ export const links = [
   {
     name: "Orders",
     icon: <FiShoppingCart />,
-    subLinks: [
-      {
-        name: "All Orders",
-        url: "/orders",
-      },
-      {
-        name: "Order Template",
-        url: "/orders/template",
-      },
-    ],
+    url: "/orders",
   },
   {
     name: "Profile",
