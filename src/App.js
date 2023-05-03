@@ -55,11 +55,10 @@ function App() {
       >
         {/* Routes */}
         <Routes>
-          <Route path="/" element={<Dashboard />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/add" element={<AddProduct />} />
-          <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/products/categories" element={<ProductCategories />} />
+          <Route path="/products/:id" element={<Dashboard />} />
+          <Route path="/products/list" element={<ProductCategories />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/:id" element={<SingleCustomer />} />
           <Route path="/sales/analysis" element={<SalesAnalytics />} />
@@ -67,11 +66,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/template" element={<OrderTemplate />} />
           <Route path="/orders/:id" element={<SingleOrder />} />
-          <Route path="/suppliers" element={<Suppliers />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/brands" element={<Brands />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/profile/settings" element={<Settings />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/inbox" element={<Inbox />} />
         </Routes>

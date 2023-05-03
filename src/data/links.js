@@ -26,19 +26,14 @@ export const links = [
         url: "/products",
       },
       {
+        name: "All Products (list view)",
+        url: "/products/list",
+      },
+      {
         name: "Add Product",
         url: "/products/add",
       },
-      {
-        name: "Product Category",
-        url: "/products/categories",
-      },
     ],
-  },
-  {
-    name: "Customers",
-    icon: <FiUsers />,
-    url: "/customers",
   },
   {
     name: "Sales",
@@ -69,29 +64,28 @@ export const links = [
     ],
   },
   {
-    name: "Suppliers",
-    icon: <FaShare />,
-    url: "/suppliers",
-  },
-  {
-    name: "Transactions",
-    icon: <FaHandshake />,
-    url: "/transactions",
-  },
-  {
-    name: "Brands",
-    icon: <FiLayers />,
-    url: "/brands",
+    name: "Profile",
+    icon: <FiMessageCircle />,
+    subLinks: [
+      {
+        name: "Settings",
+        icon: <FiSettings />,
+        url: "/profile/settings",
+      },
+      {
+        name: "Buying analysis",
+        url: "/profile/buying",
+      },
+      {
+        name: "Selling analysis",
+        url: "/profile/buying",
+      },
+    ],
   },
   {
     name: "Reviews",
     icon: <FiMessageCircle />,
     url: "/reviews",
-  },
-  {
-    name: "Settings",
-    icon: <FiSettings />,
-    url: "/settings",
   },
   {
     name: "Inbox",
