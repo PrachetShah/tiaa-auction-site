@@ -22,6 +22,8 @@ import {
   SingleProduct,
   Suppliers,
   Transactions,
+  Login,
+  Register,
 } from "./pages";
 import Footer from "./components/common/Footer";
 
@@ -74,6 +76,8 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/inbox" element={<Inbox />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </Box>
