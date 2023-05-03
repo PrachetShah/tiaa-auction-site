@@ -24,8 +24,13 @@ import {
   Transactions,
 } from "./pages";
 import Footer from "./components/common/Footer";
+import { useEffect } from "react";
+import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
+import SignInSide from "./pages/Auth/Register";
+import Signup from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
 
 const sideBarWidth = 250;
 
@@ -35,8 +40,24 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    alanBtn({
+      key: "07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage",
+      onCommand: (commandData) => {
+        if (commandData.command === "go:back") {
+          // Call the client code that will react to the received command
+        }
+      },
+    });
+  }, []);
+
   return (
-    <div>
+    <div>.
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
@@ -57,7 +78,7 @@ function App() {
         >
           {/* Routes */}
           <Routes>
-            <Route path="/products" element={<Products />} />
+            <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:id" element={<Dashboard />} />
             <Route path="/products/list" element={<ProductCategories />} />
