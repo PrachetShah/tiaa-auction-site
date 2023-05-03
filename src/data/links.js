@@ -26,73 +26,54 @@ export const links = [
         url: "/products",
       },
       {
+        name: "All Products (list view)",
+        url: "/products/list",
+      },
+      {
         name: "Add Product",
         url: "/products/add",
       },
-      {
-        name: "Product Category",
-        url: "/products/categories",
-      },
     ],
   },
-  {
-    name: "Customers",
-    icon: <FiUsers />,
-    url: "/customers",
-  },
-  {
-    name: "Sales",
-    icon: <BsCurrencyDollar />,
-    subLinks: [
-      {
-        name: "Sales Analytics",
-        url: "/sales/analysis",
-      },
-      {
-        name: "Product Sales",
-        url: "/sales",
-      },
-    ],
-  },
+  // {
+  //   name: "Sales",
+  //   icon: <BsCurrencyDollar />,
+  //   subLinks: [
+  //     {
+  //       name: "Sales Analytics",
+  //       url: "/sales/analysis",
+  //     },
+  //     {
+  //       name: "Product Sales",
+  //       url: "/sales",
+  //     },
+  //   ],
+  // },
   {
     name: "Orders",
     icon: <FiShoppingCart />,
+    url: "/orders",
+  },
+  {
+    name: "Profile",
+    icon: <FiMessageCircle />,
     subLinks: [
       {
-        name: "All Orders",
-        url: "/orders",
+        name: "Settings",
+        icon: <FiSettings />,
+        url: "/profile/settings",
       },
       {
-        name: "Order Template",
-        url: "/orders/template",
+        name: "Buying analysis",
+        url: "/profile/buying",
+      },
+      {
+        name: "Selling analysis",
+        url: "/profile/selling",
       },
     ],
   },
-  {
-    name: "Suppliers",
-    icon: <FaShare />,
-    url: "/suppliers",
-  },
-  {
-    name: "Transactions",
-    icon: <FaHandshake />,
-    url: "/transactions",
-  },
-  {
-    name: "Brands",
-    icon: <FiLayers />,
-    url: "/brands",
-  },
-  {
-    name: "Reviews",
-    icon: <FiMessageCircle />,
-    url: "/reviews",
-  },
-  {
-    name: "Settings",
-    icon: <FiSettings />,
-    url: "/settings",
-  },
+ 
   {
     name: "Inbox",
     icon: <FiMail />,
