@@ -23,7 +23,7 @@ export const links = [
     subLinks: [
       {
         name: "All Products",
-        url: "/products",
+        url: "/",
       },
       {
         name: "All Products (list view)",

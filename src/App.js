@@ -26,6 +26,9 @@ import {
 import Footer from "./components/common/Footer";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
+import SignInSide from "./pages/Auth/Register";
+import Signup from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
 
 const sideBarWidth = 250;
 
@@ -36,7 +39,11 @@ function App() {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <div>
+    <div>.
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
@@ -57,7 +64,7 @@ function App() {
         >
           {/* Routes */}
           <Routes>
-            <Route path="/products" element={<Products />} />
+            <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:id" element={<Dashboard />} />
             <Route path="/products/list" element={<ProductCategories />} />
