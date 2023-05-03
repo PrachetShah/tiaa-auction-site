@@ -36,6 +36,7 @@ const sideBarWidth = 250;
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [location, setLocation] = React.useState(window.location.pathname);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -51,6 +52,13 @@ function App() {
       },
     });
   }, []);
+
+  useEffect(() => {
+    if (window.location.pathname === "/inbox") {
+      setLocation(window.location.pathname);
+    }
+  }, [location]);
+
 
   return (
     <div>
@@ -72,10 +80,10 @@ function App() {
             width: { xs: "100%", md: `calc(100% - ${sideBarWidth}px)` },
           }}
         >
-          {/* Routes */}
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:id" element={<Dashboard />} />
@@ -85,7 +93,9 @@ function App() {
             <Route path="/profile/settings" element={<Settings />} />
             <Route path="/profile/buying" element={<UserBuying />} />
             <Route path="/profile/selling" element={<UserSelling />} />
-            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<Signup/>} />
+
           </Routes>
           <Footer />
         </Box>

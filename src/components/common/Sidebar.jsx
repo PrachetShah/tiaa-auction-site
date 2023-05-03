@@ -34,7 +34,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const location = useLocation();
   const path = location.pathname;
   return (
-    path == '/login' || path == '/signup' ? null :
+    path == '/login' || path == '/signup' || path == "/inbox" ? null :
       <Box
         component="nav"
         sx={{ width: { md: sideBarWidth }, flexShrink: { md: 0 } }}

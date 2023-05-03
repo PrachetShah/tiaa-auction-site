@@ -6,9 +6,11 @@ import Table from "../components/Table";
 import { useState, useEffect } from "react";
 import { categories } from "../data/categories";
 import ProductCard from "../components/productUi/productCard";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import RecommendProducts from "../components/recommend/recommendProducts";
 import axios from "axios";
+import Calendar from "../components/events/Calendar";
 
 const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
   return (
@@ -29,9 +31,7 @@ const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
   );
 };
 
-
 const Products = () => {
-
   const [data, setData] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -61,6 +61,9 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
+      {/* <Calendar />
+      <CategoriesNavbar /> */}
+      <RecommendProducts productName={"iPhone"} />
       <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
