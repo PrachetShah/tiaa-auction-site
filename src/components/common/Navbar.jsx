@@ -9,7 +9,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { BsBell } from "react-icons/bs";
 import { FiMenu, FiMoon, FiSun } from "react-icons/fi";
 import { useColorTheme } from "../../contexts/ThemeContext";
@@ -22,6 +22,34 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
   const location = useLocation();
   const path = location.pathname;
   const currentTheme = theme.palette.mode;
+
+  const [counter, setCounter] = useState(0);
+  const googleTranslateElementInit = () => {
+    console.log("googleTranslateElementInit");
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages: "hi,en,bn,fr,mr",
+        layout: window.google.translate.TranslateElement.InlineLayout.VERTICAL,
+      },
+      "google_translate_element"
+    );
+  };
+  useEffect(() => {
+    if (counter === 1) {
+      console.log("counter", counter);
+      var addScript = document.createElement("script");
+      addScript.setAttribute(
+        "src",
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      );
+      document.body.appendChild(addScript);
+      window.googleTranslateElementInit = googleTranslateElementInit;
+      console.log("kjnkas");
+      setCounter(2);
+    }
+    setCounter(1);
+  }, [counter]);
 
   return (
     path == '/login' || path == '/signup' ? null :
@@ -68,10 +96,11 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
               variant="h5"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              Dashboard
+              Welcome to WinWise
             </Typography>
           </Box>
           <Stack direction="row" spacing={1} alignItems="center">
+            <div id="google_translate_element"></div>
             <Tooltip title="Notifications" arrow>
               <IconButton sx={{ fontSize: "20px", color: "text.primary" }}>
                 <Badge color="error" variant="dot">
