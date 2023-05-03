@@ -57,9 +57,8 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-      <DateCalendarServerRequest />
-      <CategoriesNavbar />
-      <RecommendProducts productName={"iPhone"} />
+      {/* <CategoriesNavbar /> */}
+      {/* <RecommendProducts productName={"iPhone"} /> */}
       <CategoriesNavbar />
       <Box
         sx={{

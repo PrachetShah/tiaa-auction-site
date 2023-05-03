@@ -29,6 +29,8 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Register";
 // import Signup from "./pages/Auth/Register";
 // import Login from "./pages/Auth/Login";
 
@@ -53,20 +55,15 @@ function App() {
     });
   }, []);
 
-  useEffect (() => {
+  useEffect(() => {
     if (window.location.pathname === "/inbox") {
       setLocation(window.location.pathname);
     }
   }, [location]);
-      
+
 
   return (
     <div>
-      { location === "/inbox"?(
-      <Routes>
-        <Route path="/inbox" element={<Inbox />} />
-      </Routes>
-      ):(
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
@@ -86,6 +83,7 @@ function App() {
           }}
         >
           <Routes>
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products/:id" element={<Dashboard />} />
@@ -95,6 +93,9 @@ function App() {
             <Route path="/profile/settings" element={<Settings />} />
             <Route path="/profile/buying" element={<UserBuying />} />
             <Route path="/profile/selling" element={<UserSelling />} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<Signup/>} />
+
           </Routes>
           <Footer />
         </Box>

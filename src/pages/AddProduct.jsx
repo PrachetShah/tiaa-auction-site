@@ -20,6 +20,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 import { CloudUpload } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
   const [category, setCategory] = useState("");
@@ -69,6 +70,12 @@ const AddProduct = () => {
 
   const createProduct = async (e) => {
     e.preventDefault();
+
+    Swal.fire(
+      'Added',
+      'Your product has been sent for approval!',
+      'success'
+    )
     console.log(data);
     try {
       console.log(image);

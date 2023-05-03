@@ -18,6 +18,7 @@
     "axios": "^1.4.0",
     "dateformat": "^4.0.0",
     "dayjs": "^1.11.7",
+    "ejs": "^3.1.9",
     "ethers": "^5.7.2",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.19",
