@@ -42,7 +42,7 @@ export default function ProductCard() {
 
     const navigate = useNavigate();
     const allDetail = () => {
-        navigate("/")
+        navigate("/products/:id")
     }
     const [rating, setRating] = useState(null);
 
