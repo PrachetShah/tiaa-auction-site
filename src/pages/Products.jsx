@@ -9,6 +9,9 @@ import ProductCard from "../components/productUi/productCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import RecommendProducts from "../components/recommend/recommendProducts";
+import { useEffect } from "react";
+import axios from "axios";
+import DateCalendarServerRequest from "../components/events/Calendar";
 
 const CategoriesNavbar = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -34,10 +37,27 @@ const CategoriesNavbar = () => {
 };
 
 const Products = () => {
+  const [productData, setData] = useState([]);
+  var config = {
+    method: "get",
+    url: "http://localhost:3001/products",
+    headers: {},
+  };
+
+  axios(config)
+    .then(function (response) {
+      setData(response.data.products);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
+      <DateCalendarServerRequest />
       <CategoriesNavbar />
       <RecommendProducts productName={"iPhone"} />
+      <CategoriesNavbar />
       <Box
         sx={{
           display: "flex",
@@ -48,10 +68,11 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
-          {products.map((x) => {
+          {!productData ? <div>No auctions there . Come later !</div> : null}
+          {productData?.map((x) => {
             return (
-              <Grid item xs={4}>
-                <ProductCard />
+              <Grid key={x._id} item xs={4}>
+                <ProductCard data={x} />
               </Grid>
             );
           })}

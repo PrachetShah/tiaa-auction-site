@@ -38,7 +38,7 @@ const style = {
 
 
 
-export default function ProductCard() {
+export default function ProductCard({ data }) {
 
     const navigate = useNavigate();
     const allDetail = () => {
@@ -59,7 +59,7 @@ export default function ProductCard() {
             <MotionCardMedia
                 component="img"
                 height="194"
-                image="https://imageio.forbes.com/specials-images/imageserve/5f85be4ed0acaafe77436710/0x0.jpg?format=jpg&width=1200"
+                image={data.image || "https://imageio.forbes.com/specials-images/imageserve/5f85be4ed0acaafe77436710/0x0.jpg?format=jpg&width=1200"}
                 alt="Paella dish"
                 onClick={allDetail}
                 whileHover={{ scale: 1.1 }}
@@ -67,11 +67,12 @@ export default function ProductCard() {
 
             />
             <CardContent>
-                <Typography variant="body1" color="text.primary">
-                    Shrimp and Chorizo Paella
+                <Typography variant="body1" style={{ fontSize: "1.2rem" }}>
+                    {data.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Bid ends : September 14, 2016
+                    {data.auctionStatus == "Upcoming" ?
+                        "Start data: " + data.startDate.slice(0, 10) : "End data: " + data.endDate.slice(0, 10)}
                 </Typography>
             </CardContent>
             <Divider />
@@ -87,9 +88,7 @@ export default function ProductCard() {
             <Divider />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                    {data.description}
                 </Typography>
             </CardContent>
             <Divider />
