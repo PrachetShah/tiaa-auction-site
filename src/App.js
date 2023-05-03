@@ -24,6 +24,8 @@ import {
   Transactions,
 } from "./pages";
 import Footer from "./components/common/Footer";
+import { useEffect } from "react";
+import alanBtn from "@alan-ai/alan-sdk-web";
 
 const sideBarWidth = 250;
 
@@ -33,6 +35,17 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    alanBtn({
+      key: "07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage",
+      onCommand: (commandData) => {
+        if (commandData.command === "go:back") {
+          // Call the client code that will react to the received command
+        }
+      },
+    });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
