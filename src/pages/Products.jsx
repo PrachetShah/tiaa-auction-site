@@ -65,6 +65,7 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
+        {!productData? <div>No auctions there . Come later !</div> : null}
           {productData?.map((x) => {
             return <Grid key={x._id} item xs={4}>
               <ProductCard data={x}/>
