@@ -16,5 +16,3 @@ export { default as Brands } from "./Brands";
 export { default as Reviews } from "./Reviews";
 export { default as Settings } from "./Settings";
 export { default as Inbox } from "./Inbox";
-export { default as Login } from "./Login";
-export { default as Register } from "./Register";
