@@ -6,8 +6,8 @@ import Table from "../components/Table";
 import { useState } from "react";
 import { products, productsColumns } from "../data/products";
 import ProductCard from "../components/productUi/productCard";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -34,23 +34,24 @@ const CategoriesNavbar = () => {
   );
 };
 
-
 const Products = () => {
   const [productData, setData] = useState([]);
-  var config = {
-    method: 'get',
-    url: 'http://localhost:3001/products',
-    headers: {}
-  };
 
-  axios(config)
-    .then(function (response) {
-      setData(response.data.products)
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: "http://localhost:3001/products",
+      headers: {},
+    };
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios(config)
+      .then(function (response) {
+        setData(response.data.products);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [productData]);
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -66,9 +67,11 @@ const Products = () => {
       >
         <Grid container spacing={2}>
           {productData?.map((x) => {
-            return <Grid key={x._id} item xs={4}>
-              <ProductCard data={x}/>
-            </Grid>
+            return (
+              <Grid key={x._id} item xs={4}>
+                <ProductCard data={x} />
+              </Grid>
+            );
           })}
         </Grid>
       </Box>

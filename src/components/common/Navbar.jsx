@@ -9,12 +9,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BsBell } from "react-icons/bs";
 import { FiMenu, FiMoon, FiSun } from "react-icons/fi";
 import { useColorTheme } from "../../contexts/ThemeContext";
 import ProfileMenu from "./ProfileMenu";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
   const colorMode = useColorTheme();
@@ -48,8 +48,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
     setCounter(1);
   }, [counter]);
 
-  return (
-    path == '/login' || path == '/signup' ? null :
+  return path == "/login" || path == "/signup" ? null : (
     <AppBar
       position="fixed"
       sx={{
@@ -89,12 +88,20 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
               </IconButton>
             </Tooltip>
 
-            <Typography
-              variant="h5"
-              sx={{ display: { xs: "none", sm: "block" } }}
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
             >
-              Welcome to WinWise
-            </Typography>
+              <Typography
+                variant="h5"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                Welcome to WinWise
+              </Typography>
+            </Link>
           </Box>
           <Stack direction="row" spacing={1} alignItems="center">
             <div id="google_translate_element"></div>
