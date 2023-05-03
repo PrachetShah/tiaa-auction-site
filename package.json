@@ -5,6 +5,7 @@
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.42",
     "@cometchat-pro/chat": "^3.0.11",
+    "@devexpress/dx-react-scheduler-material-ui": "^4.0.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",

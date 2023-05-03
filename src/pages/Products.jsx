@@ -11,7 +11,7 @@ import Tab from "@mui/material/Tab";
 import RecommendProducts from "../components/recommend/recommendProducts";
 import { useEffect } from "react";
 import axios from "axios";
-import DateCalendarServerRequest from "../components/events/Calendar";
+import Calendar from "../components/events/Calendar";
 
 const CategoriesNavbar = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -57,7 +57,7 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-      <DateCalendarServerRequest />
+      <Calendar />
       <CategoriesNavbar />
       <RecommendProducts productName={"iPhone"} />
       <CategoriesNavbar />

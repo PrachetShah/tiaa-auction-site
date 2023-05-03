@@ -1,130 +1,324 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import dayjs from "dayjs";
-import Badge from "@mui/material/Badge";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
+import { styled, alpha } from "@mui/material/styles";
+import { ViewState } from "@devexpress/dx-react-scheduler";
+import {
+  Scheduler,
+  DayView,
+  Appointments,
+  MonthView,
+  Toolbar,
+  DateNavigator,
+  ViewSwitcher,
+  TodayButton,
+  Resources,
+  AppointmentTooltip,
+} from "@devexpress/dx-react-scheduler-material-ui";
+import { indigo, blue, teal } from "@mui/material/colors";
+import Paper from "@mui/material/Paper";
+import classNames from "clsx";
 
-function getRandomNumber(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
-}
+const PREFIX = "Demo";
 
-/**
- * Mimic fetch with abort controller https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
- * ⚠️ No IE11 support
- */
-function fakeFetch(date, { signal }) {
-  return new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      const daysInMonth = date.daysInMonth();
-      const daysToHighlight = [1, 2, 3].map(() =>
-        getRandomNumber(1, daysInMonth)
-      );
-
-      resolve({ daysToHighlight });
-    }, 500);
-
-    signal.onabort = () => {
-      clearTimeout(timeout);
-      reject(new DOMException("aborted", "AbortError"));
-    };
-  });
-}
-
-const initialValue = dayjs("2022-04-17");
-
-function ServerDay(props) {
-  const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-
-  const isSelected =
-    !props.outsideCurrentMonth && highlightedDays.indexOf(props.day.date()) > 0;
-
-  return (
-    <Badge
-      key={props.day.toString()}
-      overlap="circular"
-      badgeContent={isSelected ? "🌚" : undefined}
-    >
-      <PickersDay
-        {...other}
-        outsideCurrentMonth={outsideCurrentMonth}
-        day={day}
-      />
-    </Badge>
-  );
-}
-
-ServerDay.propTypes = {
-  /**
-   * The date to show.
-   */
-  day: PropTypes.object.isRequired,
-  highlightedDays: PropTypes.arrayOf(PropTypes.number),
-  /**
-   * If `true`, day is outside of month and will be hidden.
-   */
-  outsideCurrentMonth: PropTypes.bool.isRequired,
+const classes = {
+  appointment: `${PREFIX}-appointment`,
+  highPriorityAppointment: `${PREFIX}-highPriorityAppointment`,
+  mediumPriorityAppointment: `${PREFIX}-mediumPriorityAppointment`,
+  lowPriorityAppointment: `${PREFIX}-lowPriorityAppointment`,
+  weekEndCell: `${PREFIX}-weekEndCell`,
+  weekEndDayScaleCell: `${PREFIX}-weekEndDayScaleCell`,
+  text: `${PREFIX}-text`,
+  content: `${PREFIX}-content`,
+  container: `${PREFIX}-container`,
 };
 
-export default function DateCalendarServerRequest() {
-  const requestAbortController = React.useRef(null);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
+const StyledMonthViewDayScaleCell = styled(MonthView.DayScaleCell)(
+  ({ theme: { palette } }) => ({
+    [`&.${classes.weekEndDayScaleCell}`]: {
+      backgroundColor: alpha(palette.action.disabledBackground, 0.06),
+    },
+  })
+);
 
-  const fetchHighlightedDays = (date) => {
-    const controller = new AbortController();
-    fakeFetch(date, {
-      signal: controller.signal,
-    })
-      .then(({ daysToHighlight }) => {
-        setHighlightedDays(daysToHighlight);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // ignore the error if it's caused by `controller.abort`
-        if (error.name !== "AbortError") {
-          throw error;
-        }
-      });
+const StyledMonthViewTimeTableCell = styled(MonthView.TimeTableCell)(
+  ({ theme: { palette } }) => ({
+    [`&.${classes.weekEndCell}`]: {
+      backgroundColor: alpha(palette.action.disabledBackground, 0.04),
+      "&:hover": {
+        backgroundColor: alpha(palette.action.disabledBackground, 0.04),
+      },
+      "&:focus": {
+        backgroundColor: alpha(palette.action.disabledBackground, 0.04),
+      },
+    },
+  })
+);
 
-    requestAbortController.current = controller;
-  };
+const StyledAppointmentsAppointment = styled(Appointments.Appointment)(() => ({
+  [`&.${classes.appointment}`]: {
+    borderRadius: 0,
+    borderBottom: 0,
+  },
+  [`&.${classes.highPriorityAppointment}`]: {
+    borderLeft: `4px solid ${teal[500]}`,
+  },
+  [`&.${classes.mediumPriorityAppointment}`]: {
+    borderLeft: `4px solid ${blue[500]}`,
+  },
+  [`&.${classes.lowPriorityAppointment}`]: {
+    borderLeft: `4px solid ${indigo[500]}`,
+  },
+}));
 
-  React.useEffect(() => {
-    fetchHighlightedDays(initialValue);
-    // abort request on unmount
-    return () => requestAbortController.current?.abort();
-  }, []);
+const StyledAppointmentsAppointmentContent = styled(
+  Appointments.AppointmentContent
+)(({ theme: { palette } }) => ({
+  [`& .${classes.text}`]: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+  [`& .${classes.content}`]: {
+    opacity: 0.7,
+  },
+  [`& .${classes.container}`]: {
+    width: "100%",
+    lineHeight: 1.2,
+    height: "100%",
+  },
+}));
 
-  const handleMonthChange = (date) => {
-    if (requestAbortController.current) {
-      requestAbortController.current.abort();
-    }
+const appointments = [
+  {
+    title: "Prepare 2015 Marketing Plan",
+    startDate: new Date(2018, 5, 25, 13, 0),
+    endDate: new Date(2018, 5, 25, 13, 30),
+    priority: 2,
+    location: "Room 3",
+  },
+  {
+    title: "Brochure Design Review",
+    startDate: new Date(2018, 5, 28, 14, 10),
+    endDate: new Date(2018, 5, 28, 15, 30),
+    priority: 1,
+    location: "Room 1",
+  },
+  {
+    title: "Website Re-Design Plan",
+    startDate: new Date(2018, 5, 29, 9, 30),
+    endDate: new Date(2018, 5, 29, 11, 30),
+    priority: 1,
+    location: "Room 3",
+  },
+  {
+    title: "Book Flights to San Fran for Sales Trip",
+    startDate: new Date(2018, 6, 2, 12, 0),
+    endDate: new Date(2018, 6, 2, 13, 0),
+    priority: 3,
+    location: "Room 2",
+  },
+  {
+    title: "Install New Router in Dev Room",
+    startDate: new Date(2018, 6, 2, 14, 30),
+    endDate: new Date(2018, 6, 2, 15, 30),
+    priority: 2,
+    location: "Room 3",
+  },
+  {
+    title: "Approve Personal Computer Upgrade Plan",
+    startDate: new Date(2018, 6, 4, 10, 0),
+    endDate: new Date(2018, 6, 4, 11, 0),
+    priority: 1,
+    location: "Room 1",
+  },
+  {
+    title: "Final Budget Review",
+    startDate: new Date(2018, 6, 6, 12, 0),
+    endDate: new Date(2018, 6, 6, 13, 35),
+    priority: 3,
+    location: "Room 1",
+  },
+  {
+    title: "New Brochures",
+    startDate: new Date(2018, 6, 6, 14, 30),
+    endDate: new Date(2018, 6, 6, 15, 45),
+    priority: 3,
+    location: "Room 3",
+  },
+  {
+    title: "Install New Database",
+    startDate: new Date(2018, 6, 10, 9, 45),
+    endDate: new Date(2018, 6, 10, 11, 15),
+    priority: 2,
+    location: "Room 2",
+  },
+  {
+    title: "Approve New Online Marketing Strategy",
+    startDate: new Date(2018, 6, 12, 12, 0),
+    endDate: new Date(2018, 6, 12, 14, 0),
+    priority: 1,
+    location: "Room 2",
+  },
+  {
+    title: "Upgrade Personal Computers",
+    startDate: new Date(2018, 6, 16, 15, 15),
+    endDate: new Date(2018, 6, 16, 16, 30),
+    priority: 2,
+    location: "Room 3",
+  },
+  {
+    title: "Customer Workshop",
+    startDate: new Date(2018, 6, 18, 11, 0),
+    endDate: new Date(2018, 6, 18, 12, 0),
+    priority: 3,
+    location: "Room 1",
+  },
+  {
+    title: "Prepare 2015 Marketing Plan",
+    startDate: new Date(2018, 6, 20, 11, 0),
+    endDate: new Date(2018, 6, 20, 13, 30),
+    priority: 1,
+    location: "Room 3",
+  },
+  {
+    title: "New Brochures",
+    startDate: new Date(2018, 6, 23, 14, 30),
+    endDate: new Date(2018, 6, 23, 15, 45),
+    priority: 2,
+    location: "Room 3",
+  },
+  {
+    title: "Install New Database",
+    startDate: new Date(2018, 6, 23, 9, 45),
+    endDate: new Date(2018, 6, 23, 11, 15),
+    priority: 3,
+    location: "Room 2",
+  },
+  {
+    title: "Approve New Online Marketing Strategy",
+    startDate: new Date(2018, 6, 26, 12, 0),
+    endDate: new Date(2018, 6, 26, 14, 0),
+    priority: 1,
+    location: "Room 1",
+  },
+  {
+    title: "Upgrade Personal Computers",
+    startDate: new Date(2018, 6, 31, 15, 15),
+    endDate: new Date(2018, 6, 31, 16, 30),
+    priority: 2,
+    location: "Room 3",
+  },
+  {
+    title: "Install New Database",
+    startDate: new Date(2018, 6, 31, 9, 45),
+    endDate: new Date(2018, 6, 31, 11, 15),
+    priority: 3,
+    location: "Room 2",
+  },
+];
 
-    setIsLoading(true);
-    setHighlightedDays([]);
-    fetchHighlightedDays(date);
-  };
+const resources = [
+  {
+    fieldName: "location",
+    title: "Location",
+    instances: [
+      { id: "Room 1", text: "Room 1", color: indigo },
+      { id: "Room 2", text: "Room 2", color: blue },
+      { id: "Room 3", text: "Room 3", color: teal },
+    ],
+  },
+  {
+    fieldName: "priority",
+    title: "Priority",
+    instances: [
+      { id: 1, text: "High Priority", color: teal },
+      { id: 2, text: "Medium Priority", color: blue },
+      { id: 3, text: "Low Priority", color: indigo },
+    ],
+  },
+];
 
+const isWeekEnd = (date) => date.getDay() === 0 || date.getDay() === 6;
+const defaultCurrentDate = new Date(2018, 6, 2, 11, 15);
+
+const DayScaleCell = ({ startDate, ...restProps }) => (
+  <StyledMonthViewDayScaleCell
+    className={classNames({
+      [classes.weekEndDayScaleCell]: isWeekEnd(startDate),
+    })}
+    startDate={startDate}
+    {...restProps}
+  />
+);
+
+const TimeTableCell = ({ startDate, ...restProps }) => (
+  <StyledMonthViewTimeTableCell
+    className={classNames({
+      [classes.weekEndCell]: isWeekEnd(!startDate),
+    })}
+    startDate={startDate}
+    {...restProps}
+  />
+);
+
+const Appointment = ({ data, ...restProps }) => (
+  <StyledAppointmentsAppointment
+    {...restProps}
+    className={classNames({
+      [classes.highPriorityAppointment]: data.priority === 1,
+      [classes.mediumPriorityAppointment]: data.priority === 2,
+      [classes.lowPriorityAppointment]: data.priority === 3,
+      [classes.appointment]: true,
+    })}
+    data={data}
+  />
+);
+
+const AppointmentContent = ({ data, ...restProps }) => {
+  let priority = "low";
+  if (data.priority === 2) priority = "medium";
+  if (data.priority === 3) priority = "high";
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar
-        defaultValue={initialValue}
-        loading={isLoading}
-        onMonthChange={handleMonthChange}
-        renderLoading={() => <DayCalendarSkeleton />}
-        slots={{
-          day: ServerDay,
-        }}
-        slotProps={{
-          day: {
-            highlightedDays,
-          },
-        }}
-      />
-    </LocalizationProvider>
+    <StyledAppointmentsAppointmentContent {...restProps} data={data}>
+      <div className={classes.container}>
+        <div className={classes.text}>{data.title}</div>
+        <div className={classNames(classes.text, classes.content)}>
+          {`Priority: ${priority}`}
+        </div>
+        <div className={classNames(classes.text, classes.content)}>
+          {`Location: ${data.location}`}
+        </div>
+      </div>
+    </StyledAppointmentsAppointmentContent>
   );
-}
+};
+
+export default () => (
+  <Paper>
+    <Scheduler data={appointments}>
+      <ViewState defaultCurrentDate={defaultCurrentDate} />
+
+      <MonthView
+        dayScaleCellComponent={DayScaleCell}
+        timeTableCellComponent={TimeTableCell}
+      />
+      <DayView
+        displayName={"Three days"}
+        startDayHour={9}
+        endDayHour={17}
+        intervalCount={3}
+      />
+
+      <Appointments
+        appointmentComponent={Appointment}
+        appointmentContentComponent={AppointmentContent}
+      />
+      <Resources data={resources} />
+
+      <AppointmentTooltip showCloseButton />
+      <Toolbar />
+      <DateNavigator />
+      <ViewSwitcher />
+      <TodayButton />
+    </Scheduler>
+  </Paper>
+);
