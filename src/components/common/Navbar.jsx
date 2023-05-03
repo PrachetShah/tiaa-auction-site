@@ -25,7 +25,6 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
 
   const [counter, setCounter] = useState(0);
   const googleTranslateElementInit = () => {
-    console.log("googleTranslateElementInit");
     new window.google.translate.TranslateElement(
       {
         pageLanguage: "en",
@@ -37,7 +36,6 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
   };
   useEffect(() => {
     if (counter === 1) {
-      console.log("counter", counter);
       var addScript = document.createElement("script");
       addScript.setAttribute(
         "src",
@@ -45,7 +43,6 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
       );
       document.body.appendChild(addScript);
       window.googleTranslateElementInit = googleTranslateElementInit;
-      console.log("kjnkas");
       setCounter(2);
     }
     setCounter(1);

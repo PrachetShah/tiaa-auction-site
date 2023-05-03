@@ -48,7 +48,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { motion } from "framer-motion";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import chart from '../Images/chart.png'
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";

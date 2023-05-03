@@ -29,8 +29,8 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
-import Signup from "./pages/Auth/Register";
-import Login from "./pages/Auth/Login";
+// import Signup from "./pages/Auth/Register";
+// import Login from "./pages/Auth/Login";
 
 const sideBarWidth = 250;
 
@@ -54,10 +54,10 @@ function App() {
 
   return (
     <div>.
-      <Routes>
+      {/* <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-      </Routes>
+      </Routes> */}
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
