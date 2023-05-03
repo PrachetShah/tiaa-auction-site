@@ -36,7 +36,7 @@ const AddProduct = () => {
     startDate: new Date(),
     endDate: new Date(),
     image: "",
-    seller: "6451583e92a3b18816a34e4e",
+    seller: "6451583e92a3b18816a34e4e", //get from loclaSTorage after login & signup integration
   });
 
   const handleStartDateChange = (date) => {
