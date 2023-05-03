@@ -8,8 +8,10 @@ import { products, productsColumns } from "../data/products";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import RecommendProducts from "../components/recommend/recommendProducts";
 import { useEffect } from "react";
 import axios from "axios";
+import DateCalendarServerRequest from "../components/events/Calendar";
 
 const CategoriesNavbar = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -55,6 +57,9 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
+      <DateCalendarServerRequest />
+      <CategoriesNavbar />
+      <RecommendProducts productName={"iPhone"} />
       <CategoriesNavbar />
       <Box
         sx={{
@@ -66,6 +71,7 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
+          {!productData ? <div>No auctions there . Come later !</div> : null}
           {productData?.map((x) => {
             return (
               <Grid key={x._id} item xs={4}>

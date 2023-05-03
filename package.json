@@ -17,6 +17,7 @@
     "apexcharts": "^3.36.3",
     "axios": "^1.4.0",
     "dateformat": "^4.0.0",
+    "dayjs": "^1.11.7",
     "ethers": "^5.7.2",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.19",
