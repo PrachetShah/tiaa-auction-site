@@ -13,17 +13,38 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { categories } from "../data/categories";
+import { categories, auctionTypes } from "../data/categories";
 import { BiImageAdd } from "react-icons/bi";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers';
+import axios from "axios";
 
 const AddProduct = () => {
   const [category, setCategory] = useState("");
   const imageInput = useRef(null);
   const [image, setImage] = useState("");
+  const [ startDate, setStartDate ] = useState(new Date());
+  const [ endDate, setEndDate ] = useState(new Date());
+  const [ aucType, setAucType ] = useState("");
+  const [ data, setData ] = useState({
+    name: "",
+    description: "",
+    type: "Electronics",
+    auctionType: "Normal",
+    startPrice: "",
+    startDate: new Date(),
+    endDate: new Date(),
+    image: "",
+    seller: "6451583e92a3b18816a34e4e",
+  });
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-    console.log(category);
+  const handleStartDateChange = (date) => {
+    setData({...data, startDate: date});
+  };
+
+  const handleEndDateChange = (date) => {
+    setData({...data, endDate: date});
   };
 
   const UploadBox = styled(Box)({
@@ -38,6 +59,27 @@ const AddProduct = () => {
     borderWidth: "2px",
     borderColor: "divider",
   });
+
+  console.log(data);
+
+  const createProduct = async () => {
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3001/product/create',
+      headers: { 
+        "Content-Type": "application/json"
+      },
+      data : data
+    };
+    axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -64,6 +106,8 @@ const AddProduct = () => {
             variant="outlined"
             size="small"
             fullWidth
+            value={data.name}
+            onChange={(e) => setData({...data, name: e.target.value})}
           />
         </Box>
         <Box sx={{ mt: 4 }}>
@@ -73,6 +117,8 @@ const AddProduct = () => {
             rows={4}
             fullWidth
             multiline
+            value={data.description}
+            onChange={(e) => setData({...data, description: e.target.value})}
           />
         </Box>
         <Box sx={{ mt: 4 }}>
@@ -82,8 +128,8 @@ const AddProduct = () => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Category"
-              value={category}
-              onChange={handleChange}
+              value={data.type}
+              onChange={(e) => setData({...data, type:e.target.value})}
             >
               {categories?.map(({ category_id, name }) => (
                 <MenuItem value={name} key={category_id}>
@@ -93,8 +139,25 @@ const AddProduct = () => {
             </Select>
           </FormControl>
         </Box>
-
-        <Box>
+        <Box sx={{ mt: 4 }}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="demo-simple-select-label">Auction Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Auction Type"
+              value={data.auctionType}
+              onChange={(e) => {setData({...data, auctionType:e.target.value})}}
+            >
+              {auctionTypes?.map(({ type_id, type }) => (
+                <MenuItem value={type} key={type_id}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+        {/* <Box>
           <Autocomplete
             sx={{ mt: 4 }}
             multiple
@@ -121,18 +184,7 @@ const AddProduct = () => {
               />
             )}
           />
-        </Box>
-
-        <Box sx={{ mt: 4 }}>
-          <TextField
-            label="Brand"
-            variant="outlined"
-            rows={4}
-            size="small"
-            fullWidth
-          />
-        </Box>
-
+        </Box> */}
         <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 4 }}>
           <TextField
             label="Price"
@@ -140,27 +192,48 @@ const AddProduct = () => {
             rows={4}
             fullWidth
             size="small"
-            defaultValue={"$234.24"}
+            value={data.startPrice}
+            onChange={(e) => setData({...data, startPrice: e.target.value})}
           />
-          <TextField
-            label="Discount"
-            variant="outlined"
-            rows={4}
-            fullWidth
-            size="small"
-            defaultValue={"20%"}
-          />
+        </Box>
+        <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 17 }}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Auction Start Date"
+              variant="outlined"
+              minDate={new Date()}
+              rows={4}
+              size="small"
+              fullWidth
+              value={data.startDate}
+              onChange={handleStartDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <DatePicker
+              label="Auction End Date"
+              variant="outlined"
+              minDate={new Date()}
+              rows={4}
+              size="small"
+              fullWidth
+              value={data.endDate}
+              onChange={handleEndDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </Box>
         <input
           type="file"
           hidden
           ref={imageInput}
-          onChange={(e) => setImage(e.target.files[0])}
+          onChange={(e) => {
+            setData({...data, image: e.target.files[0]})
+          }}
         />
         <UploadBox onClick={() => imageInput.current.click()}>
-          {image ? (
+          {data.image ? (
             <img
-              src={image && URL.createObjectURL(image)}
+              src={data.image && URL.createObjectURL(data.image)}
               alt=""
               style={{ width: "100%", height: "100%", objectFit: "contain" }}
             />
@@ -187,7 +260,7 @@ const AddProduct = () => {
             mt: "30px",
           }}
         >
-          <Button variant="contained" sx={{ borderRadius: "20px" }}>
+          <Button variant="contained" sx={{ borderRadius: "20px" }} onClick={createProduct()}>
             Submit
           </Button>
         </Box>
