@@ -38,7 +38,7 @@ const style = {
 
 
 
-export default function ProductCard() {
+export default function ProductCard({data}) {
 
     const navigate = useNavigate();
     const allDetail = () => {
@@ -53,13 +53,14 @@ export default function ProductCard() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const MotionCardMedia = motion(CardMedia);
+    const date = new Date(data.endDate).toDateString().split(" ");
     return (
         <Card elevation={8} sx={{ maxWidth: 345 }} style={{ marginBottom: "20px" }} >
 
             <MotionCardMedia
                 component="img"
                 height="194"
-                image="https://imageio.forbes.com/specials-images/imageserve/5f85be4ed0acaafe77436710/0x0.jpg?format=jpg&width=1200"
+                image={data.image}
                 alt="Paella dish"
                 onClick={allDetail}
                 whileHover={{ scale: 1.1 }}
@@ -68,10 +69,13 @@ export default function ProductCard() {
             />
             <CardContent>
                 <Typography variant="body1" color="text.primary">
-                    Shrimp and Chorizo Paella
+                    {data.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Bid ends : September 14, 2016
+                    Bid ends : {date[2] + " " + date[1] + " " + date[3]}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    StartPrice: ₹{data.startPrice}
                 </Typography>
             </CardContent>
             <Divider />
@@ -87,9 +91,7 @@ export default function ProductCard() {
             <Divider />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                    {data.description}
                 </Typography>
             </CardContent>
             <Divider />

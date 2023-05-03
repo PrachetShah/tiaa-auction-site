@@ -3,11 +3,12 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Table from "../components/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { products, productsColumns } from "../data/products";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import axios from "axios";
 
 const CategoriesNavbar = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -34,7 +35,27 @@ const CategoriesNavbar = () => {
 
 
 const Products = () => {
+
+  const [data, setData] = useState([]);
   
+  useEffect(() => {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3001/products',
+      headers: { }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(response.data.products);
+      setData(response.data.products);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
     <CategoriesNavbar/>
@@ -48,9 +69,9 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
-          {products.map((x) => {
+          {data.map((inst) => {
             return <Grid item xs={4}>
-              <ProductCard />
+              <ProductCard data={inst} />
             </Grid>
           })}
         </Grid>
