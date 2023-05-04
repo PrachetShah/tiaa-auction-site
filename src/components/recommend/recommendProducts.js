@@ -4,19 +4,40 @@ import CategoryItem from "./category-item";
 import axios from "axios";
 import { Box, Typography, Stack, Card, Button } from "@mui/material";
 
-function RecommendProducts({ productName }) {
-  console.log(productName);
+function RecommendProducts({ data }) {
+  // console.log(productName);
+  // console.log(data);
+
+  const productName = "iPhone";
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    // let config = {
+    //   method: "get",
+    //   maxBodyLength: Infinity,
+    //   url: "https://easy-ruby-hen-cap.cyclic.app/products",
+    //   headers: {},
+    // };
+
+    // axios
+    //   .request(config)
+    //   .then((response) => {
+    //     console.log(response.data.products);
+    //     setData(response.data.products);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     axios
       .post("http://localhost:5000/recommend", {
-        item: [productName],
+        item: ["iPhone"],
       })
       .then((res) => {
-        console.log(res.data);
-        setProducts(res.data.products);
+        // console.log(res.data);
+        setProducts(res.data);
+        // console.log(products);
       });
+    console.log(data);
   }, [productName]);
   return (
     <Box>
@@ -34,9 +55,9 @@ function RecommendProducts({ productName }) {
           my: 2,
         }}
       >
+        {/* <Typography variant="h5">Testing</Typography> */}
         {products?.map((item) => {
           console.log(item);
-
           return (
             <Box
               sx={{
