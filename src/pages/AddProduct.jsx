@@ -15,9 +15,9 @@ import {
 import React, { useRef, useState } from "react";
 import { categories, auctionTypes } from "../data/categories";
 import { BiImageAdd } from "react-icons/bi";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers";
+// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+// import { LocalizationProvider } from "@mui/x-date-pickers";
+// import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 import { CloudUpload } from "@mui/icons-material";
 import Swal from "sweetalert2";
@@ -212,7 +212,7 @@ const AddProduct = () => {
             </TextField>
           </Box>
           <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 17 }}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label="Auction Start Date"
                 variant="outlined"
@@ -235,7 +235,7 @@ const AddProduct = () => {
                 onChange={handleEndDateChange}
                 renderInput={(params) => <TextField {...params} />}
               />
-            </LocalizationProvider>
+            </LocalizationProvider> */}
           </Box>
           <Box sx={{ mt: 4 }}>
             {url ? (
