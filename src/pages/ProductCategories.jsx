@@ -1,12 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import AddCategory from "../components/AddCategory";
 import Table from "../components/Table";
 import { categories, categoriesColumns } from "../data/categories";
+import axios from "axios";
 
 const ProductCategories = () => {
+  
   const [open, setOpen] = React.useState(false);
+  const [ data, setData ] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -16,6 +19,26 @@ const ProductCategories = () => {
     setOpen(false);
   };
 
+  useEffect(()=>{
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://easy-ruby-hen-cap.cyclic.app/product',
+      headers: { }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      if(data.length === 0){
+        setData(response.data.output);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }, [])
+
+  console.log(data);
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
       <Box
@@ -40,9 +63,9 @@ const ProductCategories = () => {
       </Box>
       <AddCategory open={open} handleClose={handleClose} />
       <Table
-        data={categories}
+        data={data}
         fields={categoriesColumns}
-        numberOfRows={categories.length}
+        numberOfRows={data.length}
         enableTopToolBar={true}
         enableBottomToolBar={true}
         enablePagination={true}
