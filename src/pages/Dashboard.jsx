@@ -7,7 +7,6 @@ import TopCountries from "../components/home/TopCountries";
 import TransactionCustomer from "../components/home/TransactionCustomer";
 import Table from "../components/Table";
 import { orders, ordersColumns } from "../data/orders";
-import {useNavigate} from "react-router-dom"
 import { MdLocationOn } from "react-icons/md";
 import { Button } from "@mui/material";
 import { CgArrowLongRight } from "react-icons/cg";
