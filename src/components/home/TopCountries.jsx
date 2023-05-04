@@ -9,23 +9,23 @@ const TopCountries = () => {
   const [countries, setCountries] = useState([])
   const {id} = useParams()
 
-  useEffect   (() => {
-    let config = {
-      method: 'get',
-      maxBodyLength: Infinity,
-      url: `https://easy-ruby-hen-cap.cyclic.app/product/${id}`,
-      headers: { }
-    };
+  // useEffect   (() => {
+  //   let config = {
+  //     method: 'get',
+  //     maxBodyLength: Infinity,
+  //     url: `https://easy-ruby-hen-cap.cyclic.app/product/${id}`,
+  //     headers: { }
+  //   };
     
-    axios.request(config)
-    .then((response) => {
-      console.log(response.data.product);
-      setCountries(response.data.product);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }, [])
+  //   axios.request(config)
+  //   .then((response) => {
+  //     console.log(response.data.product);
+  //     setCountries(response.data.product);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }, [])
 
   return (
     <Box sx={{ padding: "15px" }}>
