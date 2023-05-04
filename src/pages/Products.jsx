@@ -57,14 +57,8 @@ const Products = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-<<<<<<< HEAD
       {/* <CategoriesNavbar /> */}
       {/* <RecommendProducts productName={"iPhone"} /> */}
-=======
-      <Calendar />
-      <CategoriesNavbar />
-      <RecommendProducts productName={"iPhone"} />
->>>>>>> cc43bd7fe59bf1acd046feba16b0a4f943cffa0e
       <CategoriesNavbar />
       <Box
         sx={{

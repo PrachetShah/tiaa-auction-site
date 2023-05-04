@@ -44,7 +44,7 @@ export default function ProductCard({ data }) {
     const allDetail = () => {
         navigate("/products/:id")
     }
-    const [rating, setRating] = useState(null);
+    const [rating, setRating] = useState(3);
 
     const handleRatingChange = (event, value) => {
         setRating(value);

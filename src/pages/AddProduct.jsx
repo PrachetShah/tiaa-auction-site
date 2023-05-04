@@ -205,7 +205,11 @@ const AddProduct = () => {
               size="small"
               value={data.startPrice}
               onChange={(e) => setData({ ...data, startPrice: e.target.value })}
-            />
+            >
+              <MenuItem key={data.startPrice} value={data.startPrice}>
+                $
+              </MenuItem>
+            </TextField>
           </Box>
           <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 17 }}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
