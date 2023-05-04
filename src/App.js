@@ -99,17 +99,10 @@ function App() {
             <Route path="/profile/settings" element={<Settings />} />
             <Route path="/profile/buying" element={<UserBuying />} />
             <Route path="/profile/selling" element={<UserSelling />} />
-<<<<<<< HEAD
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/admin" element={<Admin/>} />
             <Route path="/events" element={<Events/>}/>
-=======
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/events" element={<Products />} />
->>>>>>> 84e0f596afbe2a669464a51cddf8910a897d1ec2
           </Routes>
           <Footer />
         </Box>
