@@ -45,7 +45,7 @@ const Products = () => {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/products',
+      url: 'https://easy-ruby-hen-cap.cyclic.app/products',
       headers: { }
     };
     

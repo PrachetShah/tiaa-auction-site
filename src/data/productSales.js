@@ -1,33 +1,34 @@
 export const productSalesColumns = [
   {
-    accessorKey: "product_name", //access nested data with dot notation
-    header: "Product",
+    accessorKey: "name", //access nested data with dot notation
+    header: "Product Name",
   },
   {
-    accessorKey: "sales",
-    header: "Sales",
+    accessorKey: "type",
+    header: "Product Type",
   },
   {
-    accessorKey: "stock", //normal accessorKey
-    header: "Stock",
+    accessorKey: "startPrice", //normal accessorKey
+    header: "Auction Start Price",
+    Cell: ({ cell }) => <span>₹{cell.getValue()}</span>,
   },
   {
-    accessorKey: "amount", //normal accessorKey
-    header: "Amount",
-    Cell: ({ cell }) => <span>${cell.getValue()}</span>,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "auctionStatus", //normal accessorKey
+    header: "Auction Status",
     //or in the component override callbacks like this
-    Cell: ({ cell, row }) => (
+    Cell: ({ cell }) => (
       <div>
-        {row.original.status === "in stock" && (
+        {cell.getValue() === "Live" && (
           <span style={{ color: "#388b84", textTransform: "capitalize" }}>
             {cell.getValue()}
           </span>
         )}
-        {row.original.status === "out of stock" && (
+        {cell.getValue() === "Upcoming" && (
+          <span style={{ color: "#388b84", textTransform: "capitalize" }}>
+            {cell.getValue()}
+          </span>
+        )}
+        {cell.getValue() === "Completed" && (
           <span style={{ color: "#fd4332", textTransform: "capitalize" }}>
             {cell.getValue()}
           </span>

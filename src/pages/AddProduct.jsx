@@ -90,7 +90,7 @@ const AddProduct = () => {
       formData.append("endDate", data.endDate);
       formData.append("seller", data.seller);
       const result = await axios.post(
-        "http://localhost:3001/product/create",
+        "https://easy-ruby-hen-cap.cyclic.app/product/create",
         formData
       );
       console.log(result);

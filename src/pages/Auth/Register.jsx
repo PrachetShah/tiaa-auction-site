@@ -145,7 +145,7 @@ const Signup = () => {
       formdata.append("pancard", values.pancard);
       formdata.append("metamask", "");
       try {
-        let response = await axios.post('http://localhost:3001/user/register', formdata)
+        let response = await axios.post('https://easy-ruby-hen-cap.cyclic.app/user/register', formdata)
         if (response.status === 201) {
           toast.success("User added");
           setTimeout(() => {
@@ -208,7 +208,7 @@ const Signup = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:3001/user/register",
+      url: "https://easy-ruby-hen-cap.cyclic.app/user/register",
       header: {
         "Content-Type": "application/json",
       },
@@ -346,7 +346,7 @@ const Signup = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:3001/user/register",
+      url: "https://easy-ruby-hen-cap.cyclic.app/user/register",
       header: {
         "Content-Type": "application/json",
       },

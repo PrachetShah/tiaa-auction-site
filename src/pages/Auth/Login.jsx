@@ -66,7 +66,7 @@ const Login = () => {
         const uuid = values.email.split("@")[0];
         var config = {
           method: "post",
-          url: 'http://localhost:3001/user/login',
+          url: 'https://easy-ruby-hen-cap.cyclic.app/user/login',
           headers: { 
             'Content-Type': 'application/json'
           },
