@@ -57,7 +57,7 @@ export const Table = ({
               <FiTrash />
             </IconButton>
           </Tooltip>
-          {showPreview && routeLink && (
+          {showPreview && (
             <Tooltip arrow placement="right" title="View">
               <Link to={`/${routeLink}/${row.id}`}>
                 <IconButton>
