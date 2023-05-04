@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import register from "../assets/videos/register.mp4";
+import register from "../../assets/videos/register.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { CometChat } from "@cometchat-pro/chat";
-import { COMETCHAT_CONSTANTS } from "../constants";
+import { COMETCHAT_CONSTANTS } from "../../constants";
 import { RiAuctionLine } from "react-icons/ri";
 import { ethers } from "ethers";
 

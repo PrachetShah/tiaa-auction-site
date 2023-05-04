@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import login from "../assets/videos/login.mp4";
+import login from "../../assets/videos/login.mp4";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import logo from "../assets/images/logo.png";
 import { CometChat } from "@cometchat-pro/chat";
-import { COMETCHAT_CONSTANTS } from "../constants";
+import { COMETCHAT_CONSTANTS } from "../../constants";
 import { RiAuctionLine } from "react-icons/ri";
 
 const Login = () => {

@@ -1,0 +1,553 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Poppins:wght@200;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@700&family=Open+Sans&family=Poppins:wght@400;600&display=swap");
+
+/* Hero */
+
+.heroSub {
+  font-family: "Poppins", sans-serif;
+  color: black;
+  font-weight: 500;
+  font-size: 46px;
+  margin: 0;
+  /* padding: 4% 4% 0%; */
+}
+
+.heroFair {
+  font-family: "Alumni Sans", sans-serif;
+  color: #187271;
+  font-weight: 800;
+  font-size: 132px;
+  line-height: 8rem;
+  margin:0;
+}
+.extraHero {
+  color: black;
+  /* padding: 0% 4% 0%; */
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 30px;
+  text-align: left;
+  justify-content: left;
+}
+
+.fairCount {
+  background-color: #187271;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  padding: 2%;
+  text-align: center;
+  float: right;
+  width: 47%;
+  transform: translate(30px, -20px);
+  /* transform: translateY(20px); */
+}
+
+.fairCount span {
+  font-size: 3rem;
+}
+
+.heroGridFair {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 95vh;
+  width: 27%;
+  background-color: rgb(42, 190, 162);
+}
+
+@media screen and (max-width: 900px) {
+  .fairCount {
+    width: 80%;
+    float: none;
+    margin: 9% 3%;
+    justify-content: center;
+    align-items: center;
+    transform: translate(15px, 0px);
+
+    /* color: green; */
+  }
+  .fairCount span {
+    font-size: 1.5rem;
+  }
+  .heroGridFair {
+    display: none;
+  }
+  .hero {
+    margin-top: 40px;
+  }
+  .heroSub {
+    margin: 0;
+    font-size: 25px;
+  }
+  .heroSub,
+  .extraHero,
+  .heroFair {
+    text-align: center;
+  }
+  .heroFair {
+    margin: 0;
+    font-size: 5rem;
+    line-height: 5rem;
+  }
+  .heroFairButton {
+    padding: 20px 0;
+    text-align: center;
+  }
+}
+/* About Page */
+
+.image-stack {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.image-stack__item--bottom {
+  grid-column: 4 / -1;
+  grid-row: 1;
+}
+.AbtFair {
+  padding-top: 225px;
+}
+.image-stack__item--top {
+  grid-row: 1;
+  grid-column: 1 / span 8;
+  padding-top: 50%;
+  z-index: 1;
+}
+
+.imgFair {
+  width: 100%;
+  display: block;
+}
+
+.contactHeading {
+  font-family: "Alumni Sans", sans-serif;
+  color: #187271;
+  text-align: left;
+}
+
+.phoneHeading {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  color: #187271;
+  line-height: 5px;
+}
+
+.heading {
+  font-family: "Alumni Sans", sans-serif;
+  color: #187271;
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.address {
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 2% 10%;
+}
+
+.addressContact {
+  text-align: left;
+  color: black;
+}
+
+.fairheading {
+  font-family: "Open Sans", sans-serif;
+  font-style: regular;
+  font-size: 36px;
+  line-height: 54px;
+  color: #2d3748;
+}
+
+.faircontent {
+  font-family: "Open Sans", sans-serif;
+  font-style: regular;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2d3748;
+  padding-top: 20px;
+}
+
+.abtfairgrid {
+  padding-inline: 5%;
+  padding-block: 50px;
+}
+
+/* Features */
+.featuresHead {
+  font-family: "Alumni Sans", sans-serif;
+  font-size: 10rem;
+  color: #2d3748;
+  font-weight: 700;
+  line-height: 150px;
+}
+.StipendHead {
+  font-family: "Alumni Sans", sans-serif;
+  font-size: 10rem;
+  color: #2d3748;
+  line-height: 150px;
+  font-weight: 700;
+  padding-left: 50px;
+}
+.stipendImg {
+  height: 150px;
+  width: 150px;
+}
+.StipendContent {
+  font-family: "Open Sans", sans-serif;
+  font-style: regular;
+  font-size: 18px;
+  color: #2d3748;
+  line-height: 24px;
+  padding-left: 200px;
+}
+.growth {
+  text-align: right;
+  padding-right: 60px;
+}
+
+.featuresContent {
+  font-family: "Open Sans", sans-serif;
+  font-style: regular;
+  font-size: 18px;
+  color: #2d3748;
+  line-height: 24px;
+}
+.featuresSpan {
+  background-color: #2abea2;
+  width: 80px;
+  padding-left: 50px;
+  margin-left: 100px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+@media (max-width: 733px) {
+  .featuresSpan {
+    display: none;
+  }
+  .stipendImg {
+    display: none;
+  }
+  .featuresHead {
+    font-size: 4rem !important;
+    line-height: 10px;
+    padding: 40px 10px 30px 0;
+  }
+  .featuresContent {
+    font-size: 1rem !important;
+    line-height: 22px;
+  }
+  .StipendContent {
+    font-size: 1rem !important;
+    line-height: 22px;
+    padding-left: 5px !important;
+  }
+  .growth {
+    padding-right: 10px;
+  }
+  .StipendHead {
+    font-size: 4rem !important;
+    line-height: 10px !important;
+    padding: 40px 10px 30px 0 !important;
+  }
+}
+
+@media (max-width: 1170px) {
+  .featuresHead {
+    font-size: 7rem;
+    line-height: 20px;
+    padding: 40px 10px 40px 0;
+  }
+  .stipendImg {
+    height: 100px;
+    width: 100px;
+    padding-top: 10px;
+  }
+  .featuresContent {
+    font-size: 1.2rem;
+    line-height: 22px;
+  }
+  .StipendContent {
+    font-size: 1.2rem;
+    line-height: 22px;
+    padding-left: 120px;
+  }
+  .StipendHead {
+    font-size: 7rem;
+    line-height: 20px;
+    padding: 40px 10px 40px 20px;
+  }
+}
+
+.date {
+  color: #187271;
+  font-size: 1.8rem;
+  font-family: "Alumni Sans", sans-serif;
+}
+
+.timelineEntry {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timelineHeading {
+  color: #2abea2;
+  font-weight: 400;
+  font-size: 2.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.timelineContent {
+  width: 100%;
+  color: #2d3748;
+}
+
+.testimony {
+  padding: 2%;
+}
+/* Past Companies */
+.pastCompanies {
+  font-family: "Alumni Sans", sans-serif;
+  color: #187271;
+  font-size: 48px;
+  line-height: 72px;
+}
+
+.swiper {
+  width: 70%;
+  height: 70%;
+  padding-right: 50px !important;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.swiper-slide img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-button-prev {
+  display: none !important;
+}
+.swiper-button-next {
+  /* background-color: black; */
+  color: #2abea2 !important;
+  /* height: 46.7px !important; */
+  /* width: 35px !important; */
+  /* border-radius: 50%; */
+}
+.testimonialSwiper {
+  width: 80%;
+}
+
+/* apl */
+
+.aplHead {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.aplWarn {
+  margin-right: 6%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #2abea346;
+  padding: 2%;
+}
+
+.aplData {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #187271;
+}
+
+@media (max-width: 800px) {
+  .pastCompanies {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .swiper-button-next {
+    height: 30.7px !important;
+    width: 20px !important;
+  }
+  .companiesdiv {
+    padding-bottom: 24px !important;
+  }
+  .timelineHeading {
+    font-size: 110%;
+  }
+}
+
+.accordionFair {
+  background-color: white !important;
+  margin: 40px;
+}
+
+@media (max-width: 600px) {
+  .fairheading {
+    font-size: 25px;
+    line-height: 30px;
+  }
+  .faircontent {
+    font-size: 15px;
+    line-height: 20px;
+    padding-top: 10px;
+  }
+  .AbtFair {
+    padding-top: 0px;
+  }
+  .featuresfair {
+    padding-left: 25px !important;
+    padding-bottom: 45px !important;
+  }
+  .feature {
+    padding-left: 0px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .extraGrid {
+    display: none !important;
+  }
+}
+
+.jobtitle {
+  font-size: 20px;
+  line-height: 45px;
+}
+.skills {
+  display: inline;
+  background-color: #2abea2;
+  border-radius: 25px;
+  padding: 0.5% 2%;
+  margin-inline: 1%;
+}
+
+/* dashboard */
+.job-card {
+  width: 90%;
+  height: 28%;
+  padding: 3%;
+  margin-block: 3%;
+}
+
+.job-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 2rem;
+  text-align: left;
+}
+
+.job-card-details {
+  margin-block: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.job-details-condition {
+  width: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.job-details-headings {
+  display: flex;
+  justify-content: space-evenly;
+  margin-block-end: 2%;
+  font-size: 0.7rem;
+  width: 100%;
+}
+
+.job-details-icon {
+  color: #fff;
+  background-color: #187271;
+  border-radius: 50%;
+  padding: 1%;
+  font-size: 1rem;
+}
+
+/* filter */
+
+.filter-card {
+  width: 85%;
+  height: 25rem;
+  padding: 8%;
+  text-align: center;
+}
+
+.filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* cart */
+.screenshot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 450px) {
+  .jobTitle {
+    font-size: 1.5rem !important;
+    padding-top: 20px !important;
+  }
+  .jobLinks {
+    padding: 0.2rem 0 0 0 !important;
+    flex-direction: column !important;
+  }
+  .job-card {
+    height: 33%;
+    padding: 4%;
+  }
+  .mainScreenButton {
+    width: 120px !important;
+    font-size: 8px !important;
+    /* transform: scale(.8); */
+  }
+}
+
+@media (max-width: 600px) {
+  .resCart {
+    padding-bottom: 100px;
+  }
+  .resCartdiv {
+    padding: 1%;
+  }
+  .mainScreenButton {
+    width: 100px;
+    /* font-size: 3px; */
+    /* transform: scale(.8); */
+  }
+}
