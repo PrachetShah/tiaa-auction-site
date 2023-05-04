@@ -32,6 +32,7 @@ import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
 import Admin from "./pages/Admin";
+// import Landing from "./pages/Dashboard/Landing";
 
 const sideBarWidth = 250;
 
@@ -63,6 +64,11 @@ function App() {
 
   return (
     <div>
+      <Routes>
+        {/* <Route path="/" element={<Landing />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
@@ -82,8 +88,6 @@ function App() {
           }}
         >
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
@@ -94,10 +98,10 @@ function App() {
             <Route path="/profile/settings" element={<Settings />} />
             <Route path="/profile/buying" element={<UserBuying />} />
             <Route path="/profile/selling" element={<UserSelling />} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/signup" element={<Signup/>} />
-            <Route path="/admin" element={<Admin/>} />
-            <Route path="/events" element={<Products/>}/>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/events" element={<Products />} />
           </Routes>
           <Footer />
         </Box>

@@ -63,7 +63,7 @@ const Products = () => {
     <Box sx={{ pt: "80px", pb: "20px" }}>
       {/* <Calendar />
       <CategoriesNavbar /> */}
-      <RecommendProducts productName={"iPhone"} />
+      {/* <RecommendProducts productName={"iPhone"} /> */}
       <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
