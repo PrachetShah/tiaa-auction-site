@@ -15,7 +15,7 @@ function RecommendProducts({ productName }) {
       })
       .then((res) => {
         console.log(res.data);
-        setProducts(res.data);
+        setProducts(res.data.products);
       });
   }, [productName]);
   return (
@@ -34,7 +34,7 @@ function RecommendProducts({ productName }) {
           my: 2,
         }}
       >
-        {products.map((item) => {
+        {products?.map((item) => {
           console.log(item);
 
           return (

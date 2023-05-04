@@ -39,7 +39,6 @@ const style = {
 
 
 export default function ProductCard({ data }) {
-
     const navigate = useNavigate();
     const allDetail = () => {
         navigate("/products/:id")
@@ -53,6 +52,8 @@ export default function ProductCard({ data }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const MotionCardMedia = motion(CardMedia);
+    const enddate = new Date(data.endDate).toDateString().split(" ");
+    const startdate = new Date(data.startDate).toDateString().split(" ");
     return (
         <Card elevation={8} sx={{ maxWidth: 345 }} style={{ marginBottom: "20px" }} >
 
@@ -67,12 +68,15 @@ export default function ProductCard({ data }) {
 
             />
             <CardContent>
-                <Typography variant="body1" style={{ fontSize: "1.2rem" }}>
+                <Typography variant="body1" color="text.primary">
                     {data.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     {data.auctionStatus == "Upcoming" ?
-                        "Start data: " + data.startDate.slice(0, 10) : "End data: " + data.endDate.slice(0, 10)}
+                        "Start data: " + startdate[2] + " " + startdate[1] + " " + startdate[3] : "End data: " + enddate[2] + " " + enddate[1] + " " + enddate[3]}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    StartPrice: ₹{data.startPrice}
                 </Typography>
             </CardContent>
             <Divider />

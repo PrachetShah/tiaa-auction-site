@@ -22,6 +22,8 @@ import {
   SingleProduct,
   Suppliers,
   Transactions,
+  Login,
+  Signup,
 } from "./pages";
 import Footer from "./components/common/Footer";
 import { useEffect } from "react";
@@ -29,10 +31,6 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Register";
-// import Signup from "./pages/Auth/Register";
-// import Login from "./pages/Auth/Login";
 
 const sideBarWidth = 250;
 
@@ -83,6 +81,8 @@ function App() {
           }}
         >
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/" element={<Products />} />
             <Route path="/products/add" element={<AddProduct />} />
@@ -100,7 +100,6 @@ function App() {
           <Footer />
         </Box>
       </Box>
-      )}
     </div>
 
   );

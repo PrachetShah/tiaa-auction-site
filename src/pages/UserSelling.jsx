@@ -6,9 +6,9 @@ import Reviews from './Reviews'
 const UserSelling = () => {
     return (
         <div>
-            <SalesAnalytics />
             <ProductSales />
-            <Reviews/>
+            <SalesAnalytics />
+            {/* <Reviews/> */}
         </div>
     )
 }

@@ -1,42 +1,23 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
-// import { gapi } from 'gapi-script';
-import {
-    Grid,
-    TextField,
-    InputAdornment,
-    Tooltip,
-    IconButton,
-    FormControl,
-    Select,
-    InputLabel,
-    MenuItem,
-    FormHelperText,
-    Box,
-} from "@mui/material";
-// import { GoogleLogin } from 'react-google-login';
-import axios from "axios";
-import EmailIcon from "@mui/icons-material/Email";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { ToastContainer, toast } from "react-toastify";
 import { motion } from "framer-motion";
 import Card from '@mui/material/Card'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import { useFormik } from 'formik';
-import { styled, useTheme } from '@mui/material/styles';
-import * as yup from 'yup';
 import { Link } from "react-router-dom";
-import { FormatAlignLeftSharp } from "@mui/icons-material";
-
+import axios from "axios";
+import {
+    Grid,
+    TextField,
+    InputAdornment,
+    IconButton,
+    Box,
+} from "@mui/material";
 
 const theme = createTheme();
 
@@ -63,11 +44,12 @@ const Login = () => {
     const [passwordShow, setpassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
 
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [values, setValues] = React.useState({
         "password": "",
         "email": "",
     });
+
     const inputChangeHandler = (e) => {
         setValues((prev) => {
             return {
@@ -77,25 +59,45 @@ const Login = () => {
         })
     }
 
-    const onSuccess = response => {
-        console.log('SUCCESS', response);
-        axios({
-            method: "POST",
-            url: "http://localhost:3500/login/googleauth",
-            data: { tokenId: response.tokenId }
-        })
-            .then((res) => {
-                console.log(res.data);
-                history("/home");
-            })
-            .catch((e) => {
-                console.log(e);
-            })
-    };
-    const onFailure = response => {
-        alert("failed");
-        console.log('FAILED', response);
-    };
+    const loginUser = () => {
+        var data = new FormData();
+        data.append("email", values.email);
+        data.append("password", values.password);
+        const uuid = values.email.split("@")[0];
+        var config = {
+          method: "post",
+          url: 'https://easy-ruby-hen-cap.cyclic.app/user/login',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+    
+        axios.request(config)
+          .then(function (response) {
+            console.log(response.data);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userid", response.data.user._id);
+            navigate("/");
+          })
+          .catch(function (error) {
+            toast.error("Invalid Credentials", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setValues({
+              email: "",
+              password: "",
+            });
+          });
+      };
+
     return (
         <Box sx={{ padding: '4%' }}>
             <Card>
@@ -182,33 +184,7 @@ const Login = () => {
                                                     textShadow: "0 0 8px rgb(255,255,255)",
                                                     transition: { duration: 0.3 },
                                                 }}
-                                                onClick={() => {
-
-                                                    var axios = require('axios');
-                                                    var data = JSON.stringify({
-                                                        "email": values.email,
-                                                        "password": values.password,
-                                                    });
-
-                                                    console.log(data);
-                                                    history("/");
-                                                    var config = {
-                                                        method: 'post',
-                                                        url: 'http://localhost:3500/login',
-                                                        headers: {
-                                                            'Content-Type': 'application/json'
-                                                        },
-                                                        data: data
-                                                    };
-                                                    axios(config)
-                                                        .then(function (response) {
-                                                            console.log(JSON.stringify(response.data));
-                                                            history("/");
-                                                        })
-                                                        .catch(function (error) {
-                                                            console.log(error);
-                                                        });
-                                                }}
+                                                onClick={loginUser}
                                             >
                                                 Submit
                                             </Button>
@@ -250,7 +226,7 @@ const Login = () => {
                                                                     .then(function (response) {
                                                                         console.log(JSON.stringify(response.data));
 
-                                                                        history(`/changepassword/${num}`);
+                                                                        navigate(`/changepassword/${num}`);
                                                                     })
                                                                     .catch((e) => {
                                                                         Swal.fire({

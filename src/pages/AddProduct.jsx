@@ -39,7 +39,7 @@ const AddProduct = () => {
     startDate: new Date(),
     endDate: new Date(),
     image: "",
-    seller: "6451583e92a3b18816a34e4e", //get from loclaSTorage after login & signup integration
+    seller: localStorage.getItem("user") ? localStorage.getItem("user") : "6451583e92a3b18816a34e4e",
   });
 
   const handleStartDateChange = (date) => {
@@ -90,7 +90,7 @@ const AddProduct = () => {
       formData.append("endDate", data.endDate);
       formData.append("seller", data.seller);
       const result = await axios.post(
-        "http://localhost:3001/product/create",
+        "https://easy-ruby-hen-cap.cyclic.app/product/create",
         formData
       );
       console.log(result);

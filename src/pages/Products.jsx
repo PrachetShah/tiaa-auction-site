@@ -3,23 +3,16 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Table from "../components/Table";
-import { useState } from "react";
-import { products, productsColumns } from "../data/products";
+import { useState, useEffect } from "react";
+import { categories } from "../data/categories";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import RecommendProducts from "../components/recommend/recommendProducts";
-import { useEffect } from "react";
 import axios from "axios";
 import Calendar from "../components/events/Calendar";
 
-const CategoriesNavbar = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue);
-  };
-
+const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
   return (
     <Tabs
       style={{ marginBottom: "20px" }}
@@ -29,37 +22,49 @@ const CategoriesNavbar = () => {
       textColor="primary"
       centered
     >
-      <Tab label="Category 1" />
-      <Tab label="Category 2" />
-      <Tab label="Category 3" />
+      {
+        allTabs?.map((category) => {
+          return <Tab label={category.name} />
+        })
+      }
     </Tabs>
   );
 };
 
 const Products = () => {
-  const [productData, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [activeTab, setActiveTab] = useState(0);
 
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const allTabs = [{category_id:0, name: "All" }, ...categories]
+  let noauctions = true;
   useEffect(() => {
-    var config = {
-      method: "get",
-      url: "http://localhost:3001/products",
-      headers: {},
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://easy-ruby-hen-cap.cyclic.app/products',
+      headers: { }
     };
-
-    axios(config)
-      .then(function (response) {
-        setData(response.data.products);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [productData]);
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(response.data.products);
+      setData(response.data.products);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }, []);
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-      {/* <CategoriesNavbar /> */}
-      {/* <RecommendProducts productName={"iPhone"} /> */}
-      <CategoriesNavbar />
+      {/* <Calendar />
+      <CategoriesNavbar /> */}
+      <RecommendProducts productName={"iPhone"} />
+      <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
           display: "flex",
@@ -70,14 +75,16 @@ const Products = () => {
         }}
       >
         <Grid container spacing={2}>
-          {!productData ? <div>No auctions there . Come later !</div> : null}
-          {productData?.map((x) => {
-            return (
-              <Grid key={x._id} item xs={4}>
-                <ProductCard data={x} />
-              </Grid>
-            );
+          {data?.map((inst) => {
+            if(allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name){
+              console.log("here")
+              noauctions = false;
+            }
+            return ((allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name) ? <Grid item xs={4}>
+              <ProductCard data={inst} />
+            </Grid> : <></>)
           })}
+          {noauctions ? <Typography variant="h5">No Auctions</Typography> : <></>}
         </Grid>
       </Box>
     </Box>

@@ -356,7 +356,7 @@ export const salesReportPieChartOptions = {
   },
 };
 
-export const productSalesDognutChartData = [63, 25, 74, 53, 67, 56];
+export const productSalesDognutChartData = [63, 25, 74, 53, 67, 0];
 
 export const productSalesDognutChartOptions = {
   labels: [
