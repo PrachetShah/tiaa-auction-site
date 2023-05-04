@@ -24,6 +24,7 @@ import {
   Transactions,
   Login,
   Signup,
+  Events,
 } from "./pages";
 import Footer from "./components/common/Footer";
 import { useEffect } from "react";
@@ -33,6 +34,7 @@ import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
 import Admin from "./pages/Admin";
 import Otp from "./pages/Auth/Otp";
+// import Landing from "./pages/Dashboard/Landing";
 
 const sideBarWidth = 250;
 
@@ -64,6 +66,11 @@ function App() {
 
   return (
     <div>
+      <Routes>
+        {/* <Route path="/" element={<Landing />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Box sx={{ display: "flex" }}>
         <Navbar
           sideBarWidth={sideBarWidth}
@@ -99,7 +106,7 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/admin" element={<Admin/>} />
-            <Route path="/events" element={<Products/>}/>
+            <Route path="/events" element={<Events/>}/>
           </Routes>
           <Footer />
         </Box>

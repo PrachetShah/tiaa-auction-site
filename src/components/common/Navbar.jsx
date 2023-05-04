@@ -84,7 +84,6 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
                 onClick={handleDrawerToggle}
                 sx={{ mr: 2, display: { md: "none" } }}
               >
-                <FiMenu />
               </IconButton>
             </Tooltip>
 

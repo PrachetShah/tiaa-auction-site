@@ -4,13 +4,15 @@ import { links } from "../../data/links";
 import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 import { useLocation } from 'react-router-dom';
+import { RiAuctionLine } from "react-icons/ri"
 
 
 const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const drawer = (
     <div>
       <Toolbar>
-        <img src="/logo.png" alt="Logo" width="40" />
+        <RiAuctionLine className="text-2xl text-white" />
+
         <Typography variant="h6" sx={{ fontWeight: "bold", ml: 2 }}>
           WinWise
         </Typography>

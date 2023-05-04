@@ -13,12 +13,20 @@ import {
 } from "react-icons/fi";
 import { BsCalendar4Event } from "react-icons/bs"
 import { MdAdminPanelSettings } from "react-icons/md";
+
+const admin = false; 
 export const links = [
   // {
   //   name: "Dashboard",
   //   icon: <FiHome />,
   //   url: "/",
   // },
+  admin == true ?
+  {
+    name: "Admin",
+    icon: <MdAdminPanelSettings />,
+    url: "/admin",
+  }:
   {
     name: "Products",
     icon: <FiShoppingBag />,
@@ -86,9 +94,5 @@ export const links = [
     icon: <BsCalendar4Event />,
     url: "/events",
   },
-  {
-    name: "Admin",
-    icon: <MdAdminPanelSettings />,
-    url: "/admin",
-  },
+
 ];

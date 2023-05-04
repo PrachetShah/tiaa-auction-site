@@ -1,5 +1,5 @@
 import { CometChat } from "@cometchat-pro/chat";
-import { CometChatUserListWithMessages } from "../cometchat-pro-react-ui-kit/CometChatWorkspace/src/components";
+import { CometChatGroupListWithMessages } from "../cometchat-pro-react-ui-kit/CometChatWorkspace/src/components";
 import Navbar from "../components/common/Navbar";
 
 const appID = "238598e661dfab4c";
@@ -57,7 +57,7 @@ const Inbox = () => {
       >
         <Navbar />
       </div>
-      <CometChatUserListWithMessages />
+      <CometChatGroupListWithMessages />
     </div>
   );
 };

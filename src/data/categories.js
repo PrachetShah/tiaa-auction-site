@@ -20,6 +20,21 @@ export const auctionTypes = [
   }
 ]
 
+export const auctionStatuses = [
+  {
+    status_id: 1,
+    status: "Upcoming",
+  },
+  {
+    status_id: 2,
+    status: "Live",
+  },
+  {
+    status_id: 3,
+    status: "Completed"
+  }
+]
+
 export const categories = [
   {
     category_id: 1,
@@ -46,4 +61,9 @@ export const categories = [
     name: "Jewelry",
     number_of_products: 8563,
   },
+  {
+    category_id: 6,
+    name: "Construction",
+    number_of_products: 235,
+  }
 ];

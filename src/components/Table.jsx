@@ -24,7 +24,7 @@ export const Table = ({
 }) => {
   const columns = useMemo(() => fields, []);
 
-  const [tableData, setTableData] = useState(() => data);
+  const [tableData, setTableData] = useState(data);
 
   // const handleDeleteRow = useCallback(
   //   (row) => {
@@ -36,11 +36,11 @@ export const Table = ({
   //   },
   //   [tableData]
   // );
-  console.log(tableData)
+  console.log(data)
   return (
     <MaterialReactTable
       columns={columns}
-      data={tableData}
+      data={data}
       getRowId={(row) => row.id}
       enableEditing={enableEditing}
       enableColumnDragging={enableColumnDragging}

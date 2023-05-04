@@ -6,7 +6,7 @@ const CategoryItem = ({ items }) => {
   const { id, name, imageUrl, price } = items;
   // console.log(imageUrl);
   return (
-    <Box sx={{ width: "50%", mx: 6, my: 3, px: 1, color: "black" }}>
+    <Box sx={{ width: "55%", mx: 6, my: 3, color: "black" }}>
       <Box
         component="div"
         sx={{
@@ -19,7 +19,7 @@ const CategoryItem = ({ items }) => {
         href={imageUrl}
         alt={name}
       />
-      <Typography variant="h5">Date</Typography>
+      {/* <Typography variant="h5">Date</Typography> */}
       <Typography variant="body1" color="black">
         {name}
       </Typography>

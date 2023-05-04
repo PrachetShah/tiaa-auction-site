@@ -51,7 +51,7 @@ const Products = () => {
     
     axios.request(config)
     .then((response) => {
-      console.log(response.data.products);
+      // console.log(response.data.products);
       setData(response.data.products);
     })
     .catch((error) => {
@@ -63,7 +63,7 @@ const Products = () => {
     <Box sx={{ pt: "80px", pb: "20px" }}>
       {/* <Calendar />
       <CategoriesNavbar /> */}
-      <RecommendProducts productName={"iPhone"} />
+      {/* <RecommendProducts productName={"iPhone"} /> */}
       <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
@@ -77,7 +77,7 @@ const Products = () => {
         <Grid container spacing={2}>
           {data?.map((inst) => {
             if(allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name){
-              console.log("here")
+              // console.log("here")
               noauctions = false;
             }
             return ((allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name) ? <Grid item xs={4}>
