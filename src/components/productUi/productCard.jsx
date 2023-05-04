@@ -188,6 +188,9 @@ export default function ProductCard({ data }) {
                 <IconButton aria-label="add to favorites" onClick={() => {handleOpenForm(data._id)}}>
                     {data.auctionStatus !== "Completed" ? <PreviewIcon /> : <></>}
                 </IconButton>
+                {/* <IconButton aria-label="add to favorites">
+                    <PreviewIcon />
+                </IconButton> */}
                 <IconButton aria-label="share">
                     <ReactWhatsapp number={phone} message={`${"Checkout the amazing auctioned item " + "http://localhost:3000/products/" + data._id}`} >
                         <ShareIcon />
@@ -224,7 +227,7 @@ export default function ProductCard({ data }) {
                         />
                     </Pannellum>
                         : <Canvas >
-                            <color attach="background" args={["black"]} />
+                            <color attach="background" args={["white"]} />
                             <ambientLight intensity={0.5} />
                             <pointLight position={[10, 10, 10]} />
                             <Suspense fallback={<Loader />}>

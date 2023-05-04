@@ -30,14 +30,14 @@ function RecommendProducts({ data }) {
     //   });
     axios
       .post("http://localhost:5000/recommend", {
-        item: ["iPhone"],
+        item: ["Iphone"],
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setProducts(res.data);
         // console.log(products);
       });
-    console.log(data);
+    console.log(products);
   }, [productName]);
   return (
     <Box>
@@ -56,33 +56,37 @@ function RecommendProducts({ data }) {
         }}
       >
         {/* <Typography variant="h5">Testing</Typography> */}
-        {products.length === 0 ? products.map((item) => {
-          console.log(item);
-          return (
-            <Box
-              sx={{
-                mb: 4,
-                mx: 3,
-                pb: 2,
-                border: "2px solid black",
-                backgroundColor: "#F6F1F1",
-              }}
-              className="mb-4 mx-3 pb-2 border-2 rounded-lg border-gray-400"
-            >
-              <CategoryItem items={item}></CategoryItem>
-              <Button
+        {products.length === 0 ? (
+          products.map((item) => {
+            console.log(item);
+            return (
+              <Box
                 sx={{
-                  border: "2px",
-                  mx: 6,
-                  px: 4,
+                  mb: 4,
+                  mx: 3,
+                  pb: 2,
+                  border: "2px solid black",
+                  backgroundColor: "#F6F1F1",
                 }}
-                variant="contained"
+                className="mb-4 mx-3 pb-2 border-2 rounded-lg border-gray-400"
               >
-                FOLLOW
-              </Button>
-            </Box>
-          );
-        }): <Typography variant="h5">No recommended products</Typography>}
+                <CategoryItem items={item}></CategoryItem>
+                <Button
+                  sx={{
+                    border: "2px",
+                    mx: 6,
+                    px: 4,
+                  }}
+                  variant="contained"
+                >
+                  Bid Now
+                </Button>
+              </Box>
+            );
+          })
+        ) : (
+          <Typography variant="h5">No recommended products</Typography>
+        )}
       </Stack>
     </Box>
   );
