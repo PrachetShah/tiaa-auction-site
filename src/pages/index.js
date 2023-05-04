@@ -18,3 +18,4 @@ export { default as Settings } from "./Settings";
 export { default as Inbox } from "./Inbox";
 export { default as Login } from "./Auth/Login";
 export { default as Signup } from "./Auth/Register";
+export { default as Events } from "./Events";

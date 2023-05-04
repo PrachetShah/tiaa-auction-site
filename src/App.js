@@ -24,6 +24,7 @@ import {
   Transactions,
   Login,
   Signup,
+  Events,
 } from "./pages";
 import Footer from "./components/common/Footer";
 import { useEffect } from "react";
@@ -97,7 +98,7 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/admin" element={<Admin/>} />
-            <Route path="/events" element={<Products/>}/>
+            <Route path="/events" element={<Events/>}/>
           </Routes>
           <Footer />
         </Box>

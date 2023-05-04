@@ -33,6 +33,7 @@ import realE1 from "../realestate/example3.jpg"
 import Swal from 'sweetalert2';
 import { TextField, Button } from '@mui/material';
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
 
 const style = {
     position: 'absolute',
@@ -81,7 +82,7 @@ export default function ProductCard({ data }) {
             .then((response) => {
                 console.log(response.data);
                 if(response.data.product.bids.length !== 0){
-                    setHighestBid(response.data.product.bids[response.data.product.bids.length - 1].bidAmount)
+                    setHighestBid(response.data.product.bids[0].bidAmount)
                 }
             })
             .catch((error) => {
@@ -98,6 +99,21 @@ export default function ProductCard({ data }) {
     const [currentBid, setBid] = useState(null);
 
     const placeBid = (id) => {
+        
+        if(currentBid < highestBid){
+            toast.error("Bid amount should be greater than current bid",
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            return;
+        }
         let data = JSON.stringify({
             "bidBy": localStorage.getItem("userId")?localStorage.getItem("userId"):"6451583e92a3b18816a34e4e",
             "bidOn": id,
@@ -170,7 +186,7 @@ export default function ProductCard({ data }) {
                     <ShoppingBagIcon />
                 </IconButton>
                 <IconButton aria-label="add to favorites" onClick={() => {handleOpenForm(data._id)}}>
-                    <PreviewIcon />
+                    {data.auctionStatus !== "Completed" ? <PreviewIcon /> : <></>}
                 </IconButton>
                 <IconButton aria-label="share">
                     <ReactWhatsapp number={phone} message={`${"Checkout the amazing auctioned item " + "http://localhost:3000/products/" + data._id}`} >
@@ -228,7 +244,9 @@ export default function ProductCard({ data }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography>Last Bid {highestBid ? highestBid : data.startPrice}</Typography>
+                    {data.type === "Construction" ? <Typography>Place your bid here: </Typography>
+                    : <Typography>Last Bid {highestBid ? highestBid : data.startPrice}</Typography>
+                    }
                     <TextField variant='outlined' label="Bid" required onChange={(e) => {setBid(e.target.value)}}/>
                     <Button variant="contained" color="primary" onClick={() => {placeBid(data._id)}}>Submit</Button>
                 </Box>

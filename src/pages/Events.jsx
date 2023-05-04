@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Table from "../components/Table";
 import { useState, useEffect } from "react";
-import { categories } from "../data/categories";
+import { auctionStatuses } from "../data/categories";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -24,7 +24,7 @@ const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
     >
       {
         allTabs?.map((category) => {
-          return <Tab label={category.name} />
+          return <Tab label={category.status} />
         })
       }
     </Tabs>
@@ -39,14 +39,14 @@ const Events = () => {
     setActiveTab(newValue);
   };
 
-  const allTabs = [{category_id:0, name: "All" }, ...categories]
+  const allTabs = [{ status_id: 0, status: "All" }, ...auctionStatuses]
   let noauctions = true;
   useEffect(() => {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
       url: 'https://easy-ruby-hen-cap.cyclic.app/products',
-      headers: { }
+      headers: {}
     };
     
     axios.request(config)
@@ -61,9 +61,6 @@ const Events = () => {
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
-      {/* <Calendar />
-      <CategoriesNavbar /> */}
-      <RecommendProducts productName={"iPhone"} />
       <CategoriesNavbar activeTab={activeTab} handleTabChange={handleTabChange} allTabs={allTabs}/>
       <Box
         sx={{
@@ -76,11 +73,11 @@ const Events = () => {
       >
         <Grid container spacing={2}>
           {data?.map((inst) => {
-            if(allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name){
-              console.log("here")
+            if(allTabs[activeTab].status === "All" || inst.auctionStatus === allTabs[activeTab].status){
+              // console.log("here")
               noauctions = false;
             }
-            return ((allTabs[activeTab].name === "All" || inst.type === allTabs[activeTab].name) ? <Grid item xs={4}>
+            return ((allTabs[activeTab].status === "All" || inst.auctionStatus === allTabs[activeTab].status) ? <Grid item xs={4}>
               <ProductCard data={inst} />
             </Grid> : <></>)
           })}
