@@ -1,20 +1,20 @@
-index,Product
-0,Macbook Pro Laptop
-1,34in Ultrawide Monitor
-2,iPhone
-3,Bose SoundSport Headphones
-4,27in FHD Monitor
-5,USB-C Charging Cable
-6,27in 4K Gaming Monitor
-7,ThinkPad Laptop
-8,Wired Headphones
-9,LG Washing Machine
-10,AA Batteries (4-pack)
-11,AAA Batteries (4-pack)
-12,Vareebadd Phone
-13,LG Dryer
-14,Lightning Charging Cable
-15,Flatscreen TV
-16,20in Monitor
-17,Apple Airpods Headphones
-18,Google Phone
+index,Product,image,price
+0,Macbook Pro Laptop,https://icentralstore.in/wp-content/uploads/2022/08/mbp-silver-gallery1-202206.jpg,120000
+1,34in Ultrawide Monitor,https://cameracompetitions.co.uk/wp-content/uploads/2023/02/LG-34in-Curved-UltraWide-Monitor.jpg,60000
+2,iPhone,https://itronics.in/wp-content/uploads/2021/09/iphone-13-pink-select-2021.png,80000
+3,Bose SoundSport Headphones,https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/soundsport_free/images/soundsport_free_explore_hotspots_3x2.psd/jcr:content/renditions/cq5dam.web.320.320.jpeg,32000
+4,27in FHD Monitor,https://images-cdn.ubuy.co.in/6341f8359d324f53cd45e9e2-hp-27er-27-inch-full-hd-1080p-ips-led.jpg,58000
+5,USB-C Charging Cable,https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MLL82?wid=1144&hei=1144&fmt=jpeg&qlt=95&.v=1575503793499,2200
+6,27in 4K Gaming Monitor,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+7,ThinkPad Laptop,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+8,Wired Headphones,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+9,LG Washing Machine,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+10,AA Batteries (4-pack),https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+11,AAA Batteries (4-pack),https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+12,Vareebadd Phone,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+13,LG Dryer,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+14,Lightning Charging Cable,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+15,Flatscreen TV,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+16,20in Monitor,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+17,Apple Airpods Headphones,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000
+18,Google Phone,https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg,10000

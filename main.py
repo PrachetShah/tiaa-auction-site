@@ -5,6 +5,7 @@ import numpy as np
 from contentBased import *
 import random 
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -16,15 +17,24 @@ def hello():
     if request.method == 'POST':
         data = request.json
 
+        products = requests.get("https://easy-ruby-hen-cap.cyclic.app/products").json()['products']
+        print(products)
+
         df = pd.read_csv('products.csv')
-        items = data['item']
+        # items = data['item']
         output = []
-        for item in items:
+        for i in range(len(products)):
+            item = products[i]['name']
             if item in df['Product'].unique():
                 # print(df_places[df_places['Place']==place]['PlaceID'])
                 suggested = recommend_products(item)
+
                 for x in suggested:
-                    output.append({"name":x, "imageUrl":"http://cdn.shopify.com/s/files/1/0153/8863/products/Headphone-Zone-Shure-AONIC-40-Black-1.jpg?v=1641452151&width=2048", "price":18})
+                    val = df[df['Product']==x].values[0]
+                    print(val)
+                    # print(df[df['Product'] == x])
+                    # output.append({"name":x[0], "imageUrl":x[1], "price":x[2]})
+                    output.append({"id":val[0], "name":val[1], "imageUrl":val[2], "price": val[3]})
         return jsonify(output)
 
 
