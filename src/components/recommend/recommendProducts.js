@@ -30,14 +30,14 @@ function RecommendProducts({ data }) {
     //   });
     axios
       .post("http://localhost:5000/recommend", {
-        item: ["iPhone"],
+        item: ["Iphone"],
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setProducts(res.data);
         // console.log(products);
       });
-    console.log(data);
+    console.log(products);
   }, [productName]);
   return (
     <Box>
@@ -56,7 +56,7 @@ function RecommendProducts({ data }) {
         }}
       >
         {/* <Typography variant="h5">Testing</Typography> */}
-        {products?.map((item) => {
+        {products.map((item) => {
           console.log(item);
           return (
             <Box
@@ -78,7 +78,7 @@ function RecommendProducts({ data }) {
                 }}
                 variant="contained"
               >
-                FOLLOW
+                Bid Now
               </Button>
             </Box>
           );
