@@ -32,6 +32,7 @@ import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
 import Admin from "./pages/Admin";
+import Otp from "./pages/Auth/Otp";
 
 const sideBarWidth = 250;
 
@@ -82,6 +83,7 @@ function App() {
           }}
         >
           <Routes>
+            <Route path="/otp" element={<Otp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/inbox" element={<Inbox />} />

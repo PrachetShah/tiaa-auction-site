@@ -1,27 +1,9 @@
 import * as React from "react";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card'
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-// import signup from '../Images/signup.jpg';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,31 +13,16 @@ import {
   Grid,
   TextField,
   InputAdornment,
-  Tooltip,
   IconButton,
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
 } from "@mui/material";
 import { useEffect } from "react";
 import axios from "axios";
-import EmailIcon from "@mui/icons-material/Email";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { motion } from "framer-motion";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import chart from '../Images/chart.png'
 // import Swal from "sweetalert2";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import { Formik } from "formik";
 import { Link } from "react-router-dom";
-import { FormatAlignLeftSharp } from "@mui/icons-material";
 import { ethers } from "ethers";
 
 
@@ -190,66 +157,6 @@ const Signup = () => {
     pancard: formik.values.pancard,
     metamask: ""
   };
-  const registerUser = () => {
-    if (!pan && role === "User") {
-      toast.error("Please verify your PAN number", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      return;
-    }
-    
-
-    var config = {
-      method: "post",
-      url: "https://easy-ruby-hen-cap.cyclic.app/user/register",
-      header: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios.request(config)
-      .then((response) => {
-        console.log(response.data, "response 2");
-        // const userAvatar = generateAvatar();
-        // const uuid = data.email.split("@")[0];
-        // const user = new CometChat.User(uuid);
-        // user.setName(data.name);
-        // user.setAvatar(userAvatar);
-
-        // CometChat.createUser(user, COMETCHAT_CONSTANTS.AUTH_KEY).then(
-        //   (x) => {
-        //     console.log(x);
-        //     localStorage.setItem("token", response.data.token);
-        //   },
-        //   (error) => {
-        //     console.log("error", error);
-        //   }
-        // );
-        localStorage.setItem("token", response.data.token);
-        history("/");
-      })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("User already exists", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      });
-  };
 
   const verifyPan = () => {
     const options = {
@@ -356,23 +263,9 @@ const Signup = () => {
     axios(config)
       .then((response) => {
         console.log(response.data);
-        // const userAvatar = generateAvatar();
-        // const uuid = data.email.split("@")[0];
-        // const user = new CometChat.User(uuid);
-        // user.setName(data.name);
-        // user.setAvatar(userAvatar);
-        //
-        // CometChat.createUser(user, COMETCHAT_CONSTANTS.AUTH_KEY).then(
-        //   (x) => {
-        //     console.log(x);
-        //     localStorage.setItem("token", response.data.token);
-        //   },
-        //   (error) => {
-        //     console.log("error", error);
-        //   }
-        // );
-        localStorage.setItem("token", response.data.token);
-        history("/");
+        localStorage.setItem("token", response.data.success);
+        localStorage.setItem("email-id", JSON.stringify(response.data.success.email));
+        history("/otp");
       })
       .catch(function (error) {
         console.log(error);
@@ -388,6 +281,51 @@ const Signup = () => {
         });
       });
   };
+
+  const registerUser = () => {
+    if (!pan && role === "User") {
+      toast.error("Please verify your PAN number", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    var config = {
+      method: "post",
+      url: "http://localhost:3001/user/register",
+      header: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios.request(config)
+      .then((response) => {
+        console.log(response.data, "response 2");
+        localStorage.setItem("token", response.data);
+        history("/otp");
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("User already exists", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
   console.log(role);
   return (
     <div style={{ padding: '4%' }}>
@@ -566,7 +504,7 @@ const Signup = () => {
                             sx={{
                               backgroundColor: 'black'
                             }}
-                            onClick={registerUser}
+                            onClick={registerMetamask}
                             >
                             Submit
                           </Button>
@@ -778,7 +716,7 @@ const Signup = () => {
                             }}
                             onClick={registerMetamask}
                             >
-                            Submit
+                            Generate OTP
                           </Button>
                         </Grid>
                       </Grid>
