@@ -31,6 +31,8 @@ import { Pannellum } from "pannellum-react";
 import { CarView, ArtPiece } from "./3dProducts"
 import realE1 from "../realestate/example3.jpg"
 import Swal from 'sweetalert2';
+import { TextField, Button } from '@mui/material';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -63,13 +65,64 @@ export default function ProductCard({ data }) {
     const handleRatingChange = (event, value) => {
         setRating(value);
     };
+    const [ highestBid, setHighestBid ] = useState(null);
     const [open, setOpen] = React.useState(false);
+    const [form, setForm] = React.useState(false);
+    const handleOpenForm = (id) => {
+        setForm(true);
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `https://easy-ruby-hen-cap.cyclic.app/product/${id}`,
+            headers: {}
+        };
+        
+        axios.request(config)
+            .then((response) => {
+                console.log(response.data);
+                if(response.data.product.bids.length !== 0){
+                    setHighestBid(response.data.product.bids[response.data.product.bids.length - 1].bidAmount)
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    const handleCloseForm = () => setForm(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const MotionCardMedia = motion(CardMedia);
     console.log(data.type);
     const enddate = new Date(data.endDate).toDateString().split(" ");
     const startdate = new Date(data.startDate).toDateString().split(" ");
+    const [currentBid, setBid] = useState(null);
+
+    const placeBid = (id) => {
+        let data = JSON.stringify({
+            "bidBy": localStorage.getItem("userId")?localStorage.getItem("userId"):"6451583e92a3b18816a34e4e",
+            "bidOn": id,
+            "bidAmount": currentBid
+        });
+          
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://easy-ruby-hen-cap.cyclic.app/bid/create',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     return (
         <Card elevation={8} sx={{ maxWidth: 345 }} style={{ marginBottom: "20px" }} >
 
@@ -114,6 +167,9 @@ export default function ProductCard({ data }) {
             <Divider />
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites" onClick={handleOpen}>
+                    <ShoppingBagIcon />
+                </IconButton>
+                <IconButton aria-label="add to favorites" onClick={() => {handleOpenForm(data._id)}}>
                     <PreviewIcon />
                 </IconButton>
                 {/* <IconButton aria-label="add to favorites">
@@ -166,6 +222,18 @@ export default function ProductCard({ data }) {
                             </Suspense>
                         </Canvas>
                     }
+                </Box>
+            </Modal>
+            <Modal
+                open={form}
+                onClose={handleCloseForm}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography>Last Bid {highestBid ? highestBid : data.startPrice}</Typography>
+                    <TextField variant='outlined' label="Bid" required onChange={(e) => {setBid(e.target.value)}}/>
+                    <Button variant="contained" color="primary" onClick={() => {placeBid(data._id)}}>Submit</Button>
                 </Box>
             </Modal>
         </Card>
