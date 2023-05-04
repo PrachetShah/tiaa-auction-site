@@ -9,8 +9,10 @@ import {
   FiShoppingBag,
   FiShoppingCart,
   FiUsers,
-} from "react-icons/fi";
 
+} from "react-icons/fi";
+import { BsCalendar4Event } from "react-icons/bs"
+import { MdAdminPanelSettings } from "react-icons/md";
 export const links = [
   // {
   //   name: "Dashboard",
@@ -73,10 +75,20 @@ export const links = [
       },
     ],
   },
- 
+
   {
     name: "Inbox",
     icon: <FiMail />,
     url: "/inbox",
+  },
+  {
+    name: "Events",
+    icon: <BsCalendar4Event />,
+    url: "/events",
+  },
+  {
+    name: "Admin",
+    icon: <MdAdminPanelSettings />,
+    url: "/admin",
   },
 ];

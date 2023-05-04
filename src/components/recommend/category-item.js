@@ -2,10 +2,11 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 
 const CategoryItem = ({ items }) => {
+  console.log(items);
   const { id, name, imageUrl, price } = items;
-  //   console.log(imageUrl);
+  // console.log(imageUrl);
   return (
-    <Box sx={{ width: "50%", mx: 6, my: 3, px: 1, color: "black" }} id={id}>
+    <Box sx={{ width: "50%", mx: 6, my: 3, px: 1, color: "black" }}>
       <Box
         component="div"
         sx={{

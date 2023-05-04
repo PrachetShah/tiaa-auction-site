@@ -31,6 +31,7 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
 import UserBuying from "./pages/UserBuying";
 import SignInSide from "./pages/Auth/Register";
+import Admin from "./pages/Admin";
 
 const sideBarWidth = 250;
 
@@ -95,7 +96,8 @@ function App() {
             <Route path="/profile/selling" element={<UserSelling />} />
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<Signup/>} />
-
+            <Route path="/admin" element={<Admin/>} />
+            <Route path="/events" element={<Products/>}/>
           </Routes>
           <Footer />
         </Box>
