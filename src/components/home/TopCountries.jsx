@@ -1,8 +1,32 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { countriesData } from "../../data/TopCountries";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const TopCountries = () => {
+
+  const [countries, setCountries] = useState([])
+  const {id} = useParams()
+
+  useEffect   (() => {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: `https://easy-ruby-hen-cap.cyclic.app/product/${id}`,
+      headers: { }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(response.data.product);
+      setCountries(response.data.product);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }, [])
+
   return (
     <Box sx={{ padding: "15px" }}>
       <Typography variant="h5">Top Countries</Typography>

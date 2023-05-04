@@ -40,8 +40,8 @@ const style = {
 
 export default function ProductCard({ data }) {
     const navigate = useNavigate();
-    const allDetail = () => {
-        navigate("/products/:id")
+    const allDetail = (id) => {
+        navigate(`/products/${id}`)
     }
     const [rating, setRating] = useState(3);
 
@@ -62,7 +62,7 @@ export default function ProductCard({ data }) {
                 height="194"
                 image={data.image || "https://imageio.forbes.com/specials-images/imageserve/5f85be4ed0acaafe77436710/0x0.jpg?format=jpg&width=1200"}
                 alt="Paella dish"
-                onClick={allDetail}
+                onClick={() => {allDetail(data._id)}}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
 
