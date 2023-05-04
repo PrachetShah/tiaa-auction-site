@@ -46,4 +46,9 @@ export const categories = [
     name: "Jewelry",
     number_of_products: 8563,
   },
+  {
+    category_id: 6,
+    name: "Construction",
+    number_of_products: 235,
+  }
 ];

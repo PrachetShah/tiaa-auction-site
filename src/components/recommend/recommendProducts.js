@@ -56,7 +56,7 @@ function RecommendProducts({ data }) {
         }}
       >
         {/* <Typography variant="h5">Testing</Typography> */}
-        {products?.map((item) => {
+        {products.length === 0 ? products.map((item) => {
           console.log(item);
           return (
             <Box
@@ -82,7 +82,7 @@ function RecommendProducts({ data }) {
               </Button>
             </Box>
           );
-        })}
+        }): <Typography variant="h5">No recommended products</Typography>}
       </Stack>
     </Box>
   );
