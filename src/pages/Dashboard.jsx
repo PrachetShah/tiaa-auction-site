@@ -11,8 +11,6 @@ import { MdLocationOn } from "react-icons/md";
 import { Button } from "@mui/material";
 import { CgArrowLongRight } from "react-icons/cg";
 import {RiInstagramFill, RiFacebookCircleFill, RiLinkedinBoxFill} from "react-icons/ri";
-
-
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';

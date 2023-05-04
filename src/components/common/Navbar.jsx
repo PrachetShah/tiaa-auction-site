@@ -48,7 +48,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
     setCounter(1);
   }, [counter]);
 
-  return path == "/login" || path == "/signup" ? null : (
+  return path == "/login" || path == "/signup" || path == "/otp" ? null : (
     <AppBar
       position="fixed"
       sx={{

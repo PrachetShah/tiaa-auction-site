@@ -51,7 +51,7 @@ const ProductCategories = () => {
       >
         <Typography variant="h6">Categories</Typography>
 
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           startIcon={<FiPlus />}
@@ -59,7 +59,7 @@ const ProductCategories = () => {
           onClick={handleClickOpen}
         >
           Add Category
-        </Button>
+        </Button> */}
       </Box>
       <AddCategory open={open} handleClose={handleClose} />
       <Table

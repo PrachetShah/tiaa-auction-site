@@ -18,6 +18,7 @@ const ProductSales = () => {
   });
 
   const [productSales, setProductSales] = useState([]);
+  const [productSalesDognutChartData, setProductSalesDognutChartData] = useState([]);
   const user_id = localStorage.getItem('user_id')? localStorage.getItem('user_id') : "6451583e92a3b18816a34e4e";
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const ProductSales = () => {
     
     axios.request(config)
     .then((response) => {
-      console.log(response.data.products)
+      console.log(response.data.products);
       setProductSales(response.data.products);
     })
     .catch((error) => {
